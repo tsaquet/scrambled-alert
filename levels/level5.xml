@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<board>
+    <status>play</status>
+    <dimensions>
+        <width>5</width>
+        <length>5</length>
+    </dimensions>
+    <wrapped>true</wrapped>
+
+    <people>
+        <operators>
+            <available>1</available>
+            <busy>0</busy>
+        </operators>
+        <users>
+            <satisfied>100</satisfied>
+            <dissatisfied>0</dissatisfied>
+        </users>
+    </people>
+    <cells>
+        <cell>
+            <posX>1</posX>
+            <posY>1</posY>
+
+            <directions>URD_</directions>
+            <type>cable</type>
+            <state>disconnected</state>
+          </cell>
+      <cell>
+            <posX>1</posX>
+            <posY>2</posY>
+
+            <directions>__D_</directions>
+            <type>server</type>
+            <state>disconnected</state>
+          </cell>
+      <cell>
+            <posX>1</posX>
+            <posY>3</posY>
+
+            <directions>U__L</directions>
+            <type>cable</type>
+            <state>disconnected</state>
+          </cell>
+      <cell>
+            <posX>1</posX>
+            <posY>4</posY>
+
+            <directions>_R_L</directions>
+            <type>cable</type>
+            <state>disconnected</state>
+          </cell>
+      <cell>
+            <posX>1</posX>
+            <posY>5</posY>
+
+            <directions>_R_L</directions>
+            <type>cable</type>
+            <state>disconnected</state>
+          </cell>
+      <cell>
+            <posX>2</posX>
+            <posY>1</posY>
+
+            <directions>UR__</directions>
+            <type>cable</type>
+            <state>disconnected</state>
+          </cell>
+      <cell>
+            <posX>2</posX>
+            <posY>2</posY>
+
+            <directions>_RD_</directions>
+            <type>cable</type>
+            <state>disconnected</state>
+          </cell>
+      <cell>
+            <posX>2</posX>
+            <posY>3</posY>
+
+            <directions>_R__</directions>
+            <type>server</type>
+            <state>safe</state>
+          </cell>
+      <cell>
+            <posX>2</posX>
+            <posY>4</posY>
+
+            <directions>___L</directions>
+            <type>server</type>
+            <state>disconnected</state>
+          </cell>
+      <cell>
+            <posX>2</posX>
+            <posY>5</posY>
+
+            <directions>UR__</directions>
+            <type>cable</type>
+            <state>disconnected</state>
+          </cell>
+      <cell>
+            <posX>3</posX>
+            <posY>1</posY>
+
+            <directions>_R_L</directions>
+            <type>cable</type>
+            <state>disconnected</state>
+          </cell>
+      <cell>
+            <posX>3</posX>
+            <posY>2</posY>
+
+            <directions>URD_</directions>
+            <type>cable</type>
+            <state>disconnected</state>
+          </cell>
+      <cell>
+            <posX>3</posX>
+            <posY>3</posY>
+
+            <directions>_R_L</directions>
+            <type>echoes</type>
+            <state>connected</state>
+          </cell>
+      <cell>
+            <posX>3</posX>
+            <posY>4</posY>
+
+            <directions>U___</directions>
+            <type>server</type>
+            <state>disconnected</state>
+          </cell>
+      <cell>
+            <posX>3</posX>
+            <posY>5</posY>
+
+            <directions>UR_L</directions>
+            <type>cable</type>
+            <state>disconnected</state>
+          </cell>
+      <cell>
+            <posX>4</posX>
+            <posY>1</posY>
+
+            <directions>UR__</directions>
+            <type>cable</type>
+            <state>disconnected</state>
+          </cell>
+      <cell>
+            <posX>4</posX>
+            <posY>2</posY>
+
+            <directions>U___</directions>
+            <type>server</type>
+            <state>disconnected</state>
+          </cell>
+      <cell>
+            <posX>4</posX>
+            <posY>3</posY>
+
+            <directions>_R__</directions>
+            <type>server</type>
+            <state>disconnected</state>
+          </cell>
+      <cell>
+            <posX>4</posX>
+            <posY>4</posY>
+
+            <directions>__DL</directions>
+            <type>cable</type>
+            <state>disconnected</state>
+          </cell>
+      <cell>
+            <posX>4</posX>
+            <posY>5</posY>
+
+            <directions>_RD_</directions>
+            <type>cable</type>
+            <state>disconnected</state>
+          </cell>
+      <cell>
+            <posX>5</posX>
+            <posY>1</posY>
+
+            <directions>UR__</directions>
+            <type>cable</type>
+            <state>disconnected</state>
+          </cell>
+      <cell>
+            <posX>5</posX>
+            <posY>2</posY>
+
+            <directions>_R_L</directions>
+            <type>cable</type>
+            <state>disconnected</state>
+          </cell>
+      <cell>
+            <posX>5</posX>
+            <posY>3</posY>
+
+            <directions>URD_</directions>
+            <type>cable</type>
+            <state>disconnected</state>
+          </cell>
+      <cell>
+            <posX>5</posX>
+            <posY>4</posY>
+
+            <directions>_RDL</directions>
+            <type>cable</type>
+            <state>disconnected</state>
+          </cell>
+      <cell>
+            <posX>5</posX>
+            <posY>5</posY>
+
+            <directions>U___</directions>
+            <type>server</type>
+            <state>disconnected</state>
+          </cell>
+      </cells>
+</board>

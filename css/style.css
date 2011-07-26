@@ -1,0 +1,279 @@
+img {
+    border: none;
+}
+
+header {
+    text-align: center;
+    margin-top: 20px;
+}
+
+table {
+    margin: auto;
+}
+
+#wait{
+    width: 16px;
+    height: 16px;
+    margin: auto;
+    background-image: url("../img/ajax-loader_arrows.gif");
+}
+
+.tumevoispas
+{
+ visibility: hidden;
+}
+
+.tumevois
+{
+ visibility: visible;
+ color: blue;
+ text-align:center;
+}
+#noscript {
+    text-align: center;
+    margin: auto;
+
+}
+#content {
+    text-align: center;
+    margin: auto;
+    width:865px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    border:1px solid;
+}
+
+#presentation {
+    width:530px;
+    height:510px;
+    margin:auto;
+    text-align:justify;
+}
+table.presentation {
+    width: 100%;
+    text-align: center;
+}
+caption {
+    font-weight: bold;
+}
+th {
+    font-weight: normal;
+}
+
+#play {
+    background-image: url("../img/play_blue.png");
+    height: 128px;
+    position: absolute;
+    width: 128px;
+    margin-left:-136px;
+    margin-top:193px;
+}
+#play:hover{
+    background-image: url("../img/play_green.png");
+}
+
+div#params {
+    float: left;
+    margin: 157px 10px 0;
+    width: 124px;
+}
+
+div#params p {
+    margin-bottom: 5px;
+}
+
+div.params {
+    border:1px solid;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    border:1px solid;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.mouse{
+    background-image:url("../img/board.png");
+    width:21px;
+    height:31px;
+}
+.mouse.empty{background-position: -191px -214px;}
+.mouse.click{margin: auto;}
+.mouse.click.left{background-position: -191px -182px;}
+.mouse.click.right{background-position: -213px -182px;}
+
+td.clockwise{
+    background-image:url("../img/board.png");
+    width:31px;
+    height:26px;
+    background-position: -188px -330px;
+}
+td.counterclockwise{
+    background-image:url("../img/board.png");
+    width:31px;
+    height:26px;
+    background-position: -155px -330px;
+}
+
+.wrapped0{
+	background-image:url("../img/wrapped0.png");
+	margin: auto;
+	height:32px;
+	width: 32px;
+}
+
+.wrapped1{
+	background-image:url("../img/wrapped1.png");
+	margin: auto;
+	height:32px;
+	width: 32px;
+}
+
+
+div.params p{margin-top: 0;}
+
+p.small{font-size:0.7em;}
+
+#splash {margin-top: 88px;}
+
+#board {
+    border:1px solid;
+    margin: 10px auto 10px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    width: 576px;
+    height: 576px;
+}
+
+div.cell
+{
+	float:left;
+	height:64px;
+	width:64px;
+	border:none;
+    background-image:url("../img/board.png");
+
+}
+
+div.cell.empty
+{
+    background-image:none;
+}
+
+div.clear{clear:both;}
+
+div.cell.cable.__DL.connected{background-position: -88px -127px;}
+div.cell.cable._R_L.connected{background-position: -46px -254px;}
+div.cell.cable._RD_.connected{background-position: 0 -127px;}
+div.cell.cable._RDL.connected{background-position:-44px -127px;}
+div.cell.cable.U__L.connected{background-position: -88px -215px;}
+div.cell.cable.U_D_.connected{background-position: -127px -46px;}
+div.cell.cable.U_DL.connected{background-position: -88px -171px;}
+div.cell.cable.UR__.connected{background-position: 0 -215px;}
+div.cell.cable.UR_L.connected{background-position: -44px -215px;}
+div.cell.cable.URD_.connected{background-position: 0 -171px;}
+div.cell.cable.URDL.connected{background-position: -44px -171px;}
+
+div.cell.cable.__DL.disconnected{background-position: -88px 0;}
+div.cell.cable._R_L.disconnected{background-position: -46px -292px;}
+div.cell.cable._RD_.disconnected{background-position: 0 0;}
+div.cell.cable._RDL.disconnected{background-position:-44px 0;}
+div.cell.cable.U__L.disconnected{background-position: -88px -88px;}
+div.cell.cable.U_D_.disconnected{background-position: -127px -156px;}
+div.cell.cable.U_DL.disconnected{background-position: -88px -44px;}
+div.cell.cable.UR__.disconnected{background-position: 0 -88px;}
+div.cell.cable.UR_L.disconnected{background-position: -44px -88px;}
+div.cell.cable.URD_.disconnected{background-position: 0 -44px;}
+div.cell.cable.URDL.disconnected{background-position: -44px -44px;}
+
+div.cell.cable.U___.connected{background-position: -127px -92px;}
+div.cell.cable._R__.connected{background-position: 0 -254px;}
+div.cell.cable.__D_.connected{background-position: -127px 0;}
+div.cell.cable.___L.connected{background-position: -92px -254px;}
+
+div.cell.cable.U___.disconnected{background-position: -127px -202px;}
+div.cell.cable._R__.disconnected{background-position: 0 -292px;}
+div.cell.cable.__D_.disconnected{background-position: -127px -110px;}
+div.cell.cable.___L.disconnected{background-position: -92px -292px;}
+
+div.cell.cable.____.disconnected{
+	background-position: -63px -63px;
+	height:26px;
+	width:26px;
+	margin:19px;
+}
+
+div.cell.echoes{
+    background-position: 93px 103px;
+    position:absolute;
+}
+
+div.cell.server{position:absolute;}
+div.cell.server.corrupted{background-position: 64px 297px;}
+div.cell.server.safe{background-position: 64px 238px;}
+div.cell.server.disconnected{background-position: 64px 356px;}
+
+div#endGame {
+    margin:250px 10px 0;
+}
+
+#stats {
+    float: right;
+    margin: 10px;
+    width: 124px;
+}
+
+div.stats {
+    border:1px solid;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    border:1px solid;
+    padding: 10px 0;
+    margin-bottom: 10px;
+    height:263px;
+}
+
+div.operator {
+    margin:7px 10px;
+    width: 41px;
+    float:left;
+    display:none;
+}
+
+div.phone {
+    position:absolute;
+    margin-left:25px;
+    margin-top:25px;
+    background-image:url("../img/phone.png");
+    width:24px;
+    height:31px;
+}
+div.alerted-phone {
+    position:absolute;
+    margin-left:25px;
+    margin-top:25px;
+    background-image:url("../img/alerted-phone.png");
+    width:24px;
+    height:31px;
+}
+
+div#rule {
+	float: left;
+	margin-top: 15px;
+	margin-left: 7px;
+}
+div#cursor {
+    border: 2px solid;
+    position: absolute;
+    width: 36px;
+    display:none;
+}
+div.users{
+    float: right;
+    margin-right: 5px;  
+}
+div#dissatisfiedUsers {
+	margin-top: 129px;	
+}
+footer {
+    text-align: center;
+}
