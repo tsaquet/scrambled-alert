@@ -132,34 +132,34 @@ else
 
 			<div id="sort-nav">
 				<div class="bg-right bg-left">
-						<div class="cl">&nbsp;</div>
-						<ul class="menu">
-							<li class="first bg-left">
-								<a href="javascript:ajax('init', 'level=didacticiel')">Nouvelle partie</a>
-								<ul>
-									<li><a href="javascript:ajax('init', 'level=didacticiel')">Didacticiel</a></li>
-									<li><a href="javascript:ajax('init', 'level=novice')">Novice</a></li>
-									<li><a href="javascript:ajax('init', 'level=normal')">Normal</a></li>
-									<li><a href="javascript:ajax('init', 'level=expert')">Expert</a></li>
-									<li><a href="javascript:ajax('init', 'level=maitre')">Maître</a></li>
-								</ul>
-							</li>
-							<li onclick='openScores(); ' onmouseout='hideBubble();' onmouseover='showBubble("Ouvrir le tableau des scores.")'>
-								<a href="#">Scores</a>
-							</li>
-							<li onmouseout='hideBubble();' onmouseover='showBubble("Version bêta : pas encore disponible") '>
-								<a href="#">Hauts faits</a>
-							</li>
-							<li>
-								<a href="#">Partager</a>
-								<ul>
-									<li><a href="javascript:openPopup('pages/invites.php')">Inviter mes amis</a></li>
-									<li><a href="javascript:openPopup('pages/wallPublication.php')">Sur mon mur</a></li>
-								</ul>
-							</li>
-							<div class="tumevoispas" id="wait"></div>
-						</ul>
-						<div class="cl">&nbsp;</div>
+					<div class="cl">&nbsp;</div>
+					<ul class="menu">
+						<li class="first bg-left">
+							<a href="javascript:ajax('init', 'level=didacticiel')">Nouvelle partie</a>
+							<ul>
+								<li><a href="javascript:ajax('init', 'level=didacticiel')">Didacticiel</a></li>
+								<li><a href="javascript:ajax('init', 'level=novice')">Novice</a></li>
+								<li><a href="javascript:ajax('init', 'level=normal')">Normal</a></li>
+								<li><a href="javascript:ajax('init', 'level=expert')">Expert</a></li>
+								<li><a href="javascript:ajax('init', 'level=maitre')">Maître</a></li>
+							</ul>
+						</li>
+						<li onclick='openScores(); ' onmouseout='hideBubble();' onmouseover='showBubble("Ouvrir le tableau des scores.")'>
+							<a>Scores</a>
+						</li>
+						<li onmouseout='hideBubble();' onmouseover='showBubble("Version bêta : pas encore disponible") '>
+							<a>Hauts faits</a>
+						</li>
+						<li>
+							<a>Partager</a>
+							<ul>
+								<li><a href="javascript:openPopup('pages/invites.php')">Inviter mes amis</a></li>
+								<li><a href="javascript:openPopup('pages/wallPublication.php')">Sur mon mur</a></li>
+							</ul>
+						</li>
+						<div class="tumevoispas" id="wait"></div>
+					</ul>
+					<div class="cl">&nbsp;</div>
 				</div>
 			</div>
 			<div id="content">
