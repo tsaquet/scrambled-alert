@@ -11,8 +11,6 @@ else
 	require_once("../class/managers/mysql.php");
 }
 
-
-
 class Request
 {
 	private $sql;

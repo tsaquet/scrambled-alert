@@ -16,18 +16,18 @@ class DBM
 
 	private function __construct()
 	{
-		$server = gethostbyaddr(gethostbyname($_SERVER["SERVER_NAME"]));
-		if ($server === "helios")
+		if ($_SERVER["SERVER_NAME"] === "127.0.0.2")
 		{
-				$this->pass = base64_decode('MEdjJU5WRFFHJHFYaGRXVw==');
+				$this->pass = '';
 		}
 		else
 		{		
-				$this->pass = '';
+				$this->pass = base64_decode('MEdjJU5WRFFHJHFYaGRXVw==');
 		}
 		$this->host = 'localhost';
 		$this->user = 'echoes';
 		$this->db = 'echoes_game';
+		
 	}
 
 	public function __destruct()
