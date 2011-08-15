@@ -1,53 +1,203 @@
+/*----- Start "Main definitions" -----*/
+* { padding: 0; margin: 0; outline: 0; }
+
+body {
+    font-size: 12px;
+    line-height: 1.2;
+    font-family: Arial, "Trebuchet MS", sans-serif;
+    background: url(images/bg.gif) repeat 0 0;
+    text-align: left;
+	height:100%;
+}
+
+
+a:hover { text-decoration: none; }
+
+.left { float: left; display: inline; }
+.right { float: right; display: inline; }
+
+.cl, .clear { display: block; height: 0; font-size: 0; line-height: 0; text-indent: -4000px; clear: both; }
+.field { font-size: 12px; color: #484848; font-family: Arial, "Trebuchet MS", sans-serif; color: #000; border: solid 1px #a0a0a0; width: 140px; padding: 2px 5px; }
+/*----- End "Main definitions" -----*/
+
+.shell { 
+	width: 740px; 
+	margin: 0 auto; 
+}
+
+header {
+	margin-bottom : 5px;
+}
+
 img {
     border: none;
 }
 
-header {
-    text-align: center;
-    margin-top: 20px;
+.logo img  {
+	margin-top :  7px;
+	margin-left : 20px;
+	position : absolute;
+}
+
+
+#top-nav { float: right; display: inline;}
+#top-nav ul { float: left; display: inline; font-size: 10px; line-height: 31px; color: #fff; text-transform: uppercase; background: url(images/top-nav-bg.jpg) repeat-x 0 0; }
+#top-nav ul li { float: left; display: inline; list-style-type: none; }
+#top-nav ul li a { float: left; display: inline; color: #fff; text-decoration: none; padding: 0 10px 0 8px; background: url(images/top-nav-sep.gif) no-repeat right 0; }
+#top-nav ul li a:hover { text-decoration: underline; }
+#top-nav ul li.last { padding-right: 4px; background: url(images/top-nav-last.gif) no-repeat right 0; }
+#top-nav ul li.last a { background: none; }
+#top-nav ul li.home { width: 88px; background: url(images/top-nav-home.gif) no-repeat 0 0; }
+#top-nav ul li.home a { background: none; width: 67px; height: 31px; line-height: 29px; padding: 0; color: #141414; font-weight: bold; padding-left: 21px; }
+
+
+
+
+
+/* Menu d�roulant */
+
+#sort-nav { line-height: 37px; background: url(images/sort-nav-bg.gif) repeat-x 0 0; margin-top : 55px; text-align: center; z-index:500;}
+#sort-nav .bg-left { background: url(images/sort-nav-bg-left.gif) no-repeat 0 0; position: relative; height: 37px; }
+#sort-nav .bg-right { background: url(images/sort-nav-bg-right.gif) no-repeat right 0; position: relative; height: 37px; }
+#sort-nav ul li { float: left; display: inline; list-style-type: none; height: 37px; border-right: 1px solid; z-index:500; }
+#sort-nav ul li a { float: left; display: inline; font-size: 13px; font-weight: bold; color: #282828; text-decoration: none; padding: 0 10px; z-index:500;}
+#sort-nav ul li a:hover { text-decoration: underline; }
+#sort-nav ul li.active a { color: #fff; text-decoration: none; }
+#sort-nav ul li.first-active a { background: url(images/nav-active-first.gif) no-repeat 0 0; }
+#sort-nav ul li.active { background: url(images/nav-active-bg.gif) repeat-x 0 0; }
+
+.menu ul /* Liste */     
+{
+	padding : 0; /* pas de marge int�rieure */
+	margin : 0; /* ni ext�rieure */
+	list-style : none; /* on supprime le style par d�faut de la liste */
+	text-align : center; /* on centre le texte qui se trouve dans la liste */
+	z-index:500;
+}
+
+.menu /* Ensemble du menu */
+{
+	font-weight : bold; /* on met le texte en gras */
+	font-size : 12px; /* hauteur du texte : 12 pixels */
+	z-index:500;
+}
+
+.menu a /* Contenu des listes */
+{
+	display : block; /* on change le type d'�l�ment, les liens deviennent des balises de type block */
+	padding : 0; /* aucune marge int�rieure */  
+	color : #fff; /* couleur du texte */
+	text-decoration : none; /* on supprime le style par d�faut des liens (la plupart du temps = soulign�) */
+	width : 140px; /* largeur */
+}
+
+
+.menu li ul /* Sous-listes */
+{ 
+	top:37px;
+	position: absolute; /* Position absolue */
+	width: 160px; /* Largeur des sous-listes */
+	left: -999em; /* Hop, on envoie loin du champ de vision */
+	background-color:#A0A0A0;
+	border: 1px solid;
+	z-index:500;
+}
+
+
+.menu li ul li /* El�ments de sous-listes */
+{
+	/* pour ie qui ne reconna�t pas "transparent" (comme pr�c�demment) */
+	border-top : 1px solid #fff; /* on met une bordure blanche en haut de chaque �l�ment d'une sous-liste */
+	z-index:500;
+}
+
+/* IE ne reconnaissant pas le s�lecteur ">" */
+html>body .menu li ul li                
+{
+	border-top : 1px solid transparent; /* on met une bordure transparente en haut de chaque �l�ment */
+	z-index:500;
+}
+
+.menu li ul ul 
+{
+	margin    : -22px 0 0 144px ; /* On d�cale les sous-sous-listes pour qu'elles ne soient pas au dessus des sous-listes */ 
+	/* pour IE qui ne reconna�t pas "transparent" (comme pr�c�demment) */
+	border-left     : 1px solid #fff ; /* Petite bordure � gauche pour ne pas coller ... */ 
+	background-color: #A0A0A0;
+	z-index:500;
+}
+
+/* IE ne reconnaissant pas le s�lecteur ">" ... je me r�p�te ;-) */
+html>body .menu li ul ul                
+{
+	border-left     : 1px solid transparent ; /* on met une bordure transparente sur la gauche de chaque �l�ment */
+	z-index:500;
+}
+
+.menu a:hover /* Lorsque la souris passe sur un des liens */    
+{
+	color: #000; /* On passe le texte en noir... */
+}
+
+.menu li:hover ul ul, .menu li.sfhover ul ul /* Sous-sous-listes lorsque la souris passe sur un �l�ment de liste */
+{
+	left: -999em; /* On exp�die les sous-sous-listes hors du champ de vision */
+}
+
+.menu li:hover ul, .menu li li:hover ul, .menu li.sfhover ul, .menu li li.sfhover ul  /* Sous-listes lorsque la souris passe sur un �l�ment de liste ET sous-sous-lites lorsque la souris passe sur un �l�ment de sous-liste */
+{
+	left: auto; /* Repositionnement normal */
+	min-height: 0; /* Corrige un bug sous IE */
+}
+
+/* Fin Menu d�roulant */
+
+.main { 
+	height: 578px;
+	border : 5px solid;
+	border-radius : 10px;
+	webkit-border-radius : 10px;
+	moz-border-radius : 10px;
+	background-color: #000;
 }
 
 table {
     margin: auto;
 }
 
-#wait{
-    width: 16px;
-    height: 16px;
-    margin: auto;
-    background-image: url("../img/ajax-loader_arrows.gif");
-}
+span.nav { float: left; display: inline; width: 28px; height: 27px; font-size: 0; line-height: 0; text-indent: -4000px; cursor: pointer; margin-left: 2px; }
+span.prev { background: url(images/button-prev.png) no-repeat 0 0; }
+span.next { background: url(images/button-next.png) no-repeat 0 0; }
 
-.tumevoispas
-{
+span #spanNbClick { float: left; width: 28px;}
+
+.tumevoispas {
  visibility: hidden;
 }
 
-.tumevois
-{
+.tumevois {
  visibility: visible;
- color: blue;
  text-align:center;
 }
+
 #noscript {
     text-align: center;
     margin: auto;
 
 }
+
 #content {
     text-align: center;
     margin: auto;
-    width:865px;
-    -moz-border-radius: 15px;
-    border-radius: 15px;
-    border:1px solid;
+    width:740px;
 }
 
 #presentation {
     width:530px;
-    height:510px;
+    height:400px;
     margin:auto;
     text-align:justify;
+	margin-top : 50px
 }
 table.presentation {
     width: 100%;
@@ -72,47 +222,6 @@ th {
     background-image: url("../img/play_green.png");
 }
 
-div#params {
-    float: left;
-    margin: 157px 10px 0;
-    width: 124px;
-}
-
-div#params p {
-    margin-bottom: 5px;
-}
-
-div.params {
-    border:1px solid;
-    -moz-border-radius: 15px;
-    border-radius: 15px;
-    border:1px solid;
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
-.mouse{
-    background-image:url("../img/board.png");
-    width:21px;
-    height:31px;
-}
-.mouse.empty{background-position: -191px -214px;}
-.mouse.click{margin: auto;}
-.mouse.click.left{background-position: -191px -182px;}
-.mouse.click.right{background-position: -213px -182px;}
-
-td.clockwise{
-    background-image:url("../img/board.png");
-    width:31px;
-    height:26px;
-    background-position: -188px -330px;
-}
-td.counterclockwise{
-    background-image:url("../img/board.png");
-    width:31px;
-    height:26px;
-    background-position: -155px -330px;
-}
 
 .wrapped0{
 	background-image:url("../img/wrapped0.png");
@@ -128,38 +237,178 @@ td.counterclockwise{
 	width: 32px;
 }
 
-
 div.params p{margin-top: 0;}
 
 p.small{font-size:0.7em;}
 
 #splash {margin-top: 88px;}
 
+#top {
+	float:left;
+    width: 728px;
+    height: 70px;
+}
+
+div.top {
+	float:left;
+	border:1px solid;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    margin: 0px 2px;
+    height: 70px;
+}
+
+div.top1 {
+	margin-left:73px;
+}
+
+#leftside {
+	float:left;
+	margin-right:5px;
+}
+
+div.leftside {
+	border:1px solid;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    width: 70px;
+	border-color : #000;
+	background-color : #FFFAFA;
+	height: 576px
+}
+
+table#nbClick {
+	margin-top : 40px;
+	margin-bottom: 20px;
+}
+
+table#inverse {
+	margin-top : 20px;
+	margin-bottom : 5px;
+}
+
+div#wrapped {
+	margin-top : 20px;
+}
+
+div#stats_operator {
+	margin-top : 20px;
+}
+
 #board {
+	float:left;
     border:1px solid;
-    margin: 10px auto 10px;
     -moz-border-radius: 15px;
     border-radius: 15px;
     width: 576px;
     height: 576px;
+	background-color : #FFFAFA;
+	border-color : #000;
+	z-index:400;
 }
 
-div.cell
-{
+#rightside {
+	float:left;
+	margin-left: 5px;
+}
+
+
+div#endGame {
+    margin:250px 10px 0;
+}
+
+#stats_operator {
+    width: 70px;
+	
+}
+#stats_users {
+	display: inline-block;
+    width: 70px;
+	height: 576px
+}
+
+div.rightside {
+	border:1px solid;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+}
+
+
+div.stats {
+    border:1px solid;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    padding: 10px 0;
+    margin-bottom: 3px;
+	border-color : #000;
+	background-color : #FFFAFA;
+	height: 556px;
+}
+
+div.operator {
+    margin:7px 10px;
+    width: 41px;
+    display:none;
+}
+
+div.phone {
+    position:absolute;
+    margin-left:25px;
+    margin-top:25px;
+    background-image:url("../img/phone.png");
+    width:24px;
+    height:31px;
+}
+div.alerted-phone {
+    position:absolute;
+    margin-left:25px;
+    margin-top:25px;
+    background-image:url("../img/alerted-phone.png");
+    width:24px;
+    height:31px;
+}
+
+div#rule {
+	float: left;
+	margin-left: 15px;
+	margin-top : 50px;
+}
+div#cursor {
+    border: 2px solid;
+    position: absolute;
+    width: 36px;
+    display:none;
+}
+div.users{
+    margin-left: 2px;  
+}
+
+div#satisfiedUsers {
+	margin-top: 40px;	
+}
+
+div#dissatisfiedUsers {	
+	margin-top : 340px;
+}
+
+div#footer {
+    text-align: center;
+	color:#FFFAFA ;
+}
+
+
+div.cell {
 	float:left;
 	height:64px;
 	width:64px;
 	border:none;
     background-image:url("../img/board.png");
-
+	z-index:400;
 }
 
-div.cell.empty
-{
+div.cell.empty {
     background-image:none;
 }
-
-div.clear{clear:both;}
 
 div.cell.cable.__DL.connected{background-position: -88px -127px;}
 div.cell.cable._R_L.connected{background-position: -46px -254px;}
@@ -212,68 +461,205 @@ div.cell.server.corrupted{background-position: 64px 297px;}
 div.cell.server.safe{background-position: 64px 238px;}
 div.cell.server.disconnected{background-position: 64px 356px;}
 
-div#endGame {
-    margin:250px 10px 0;
-}
-
-#stats {
-    float: right;
-    margin: 10px;
-    width: 124px;
-}
-
-div.stats {
-    border:1px solid;
-    -moz-border-radius: 15px;
-    border-radius: 15px;
-    border:1px solid;
-    padding: 10px 0;
-    margin-bottom: 10px;
-    height:263px;
-}
-
-div.operator {
-    margin:7px 10px;
-    width: 41px;
-    float:left;
-    display:none;
-}
-
-div.phone {
-    position:absolute;
-    margin-left:25px;
-    margin-top:25px;
-    background-image:url("../img/phone.png");
-    width:24px;
+.mouse{
+    background-image:url("../img/board.png");
+    width:21px;
     height:31px;
 }
-div.alerted-phone {
-    position:absolute;
-    margin-left:25px;
-    margin-top:25px;
-    background-image:url("../img/alerted-phone.png");
-    width:24px;
-    height:31px;
+.mouse.empty{background-position: -191px -214px;}
+.mouse.click{margin: auto;}
+
+.mouse.click.left {
+	background-position: -191px -182px;
+	margin-left : 4px
 }
 
-div#rule {
-	float: left;
-	margin-top: 15px;
-	margin-left: 7px;
+.mouse.click.right {
+	background-position: -213px -182px;
+	margin-right : 4px
 }
-div#cursor {
-    border: 2px solid;
-    position: absolute;
-    width: 36px;
-    display:none;
+
+div.space {
+	height: 5px
 }
-div.users{
-    float: right;
-    margin-right: 5px;  
+
+#wait {
+    width: 16px;
+    height: 11px;
+    right: 40px;
+	top:1px;
+	position: absolute;
+    background-image: url("../img/ajax-loader.gif");
 }
-div#dissatisfiedUsers {
-	margin-top: 129px;	
+
+td.left-click {
+	background-image: url("../img/board.png");
+	background-position: -187px -330px;
+    width:31px;
+    height:26px;
 }
-footer {
-    text-align: center;
+
+td.right-click {
+	background-image: url("../img/board.png");
+    width:31px;
+    height:26px;
+    background-position: -156px -330px;
 }
+
+div.ads{
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	height: 90px;
+	background-color: white;
+}
+
+div.ads.ads_top{
+	padding-bottom: 5px;
+}
+
+div.ads.ads_bottom{
+	padding-top: 5px;
+}
+
+div.center{
+	margin-left: auto;
+	margin-right: auto;
+	width: 728px;
+	border-radius : 15px;
+	webkit-border-radius : 15px;
+	moz-border-radius : 15px;
+	position: relative;
+}
+
+div.clear{clear:both;}
+
+div.sep {
+	height:1px;
+	border-top:solid 1px;
+	color:#000;
+	margin-top:20px;
+}
+
+.bubble{
+    position: absolute;   
+    visibility : hidden;
+    border: 1px solid Black;
+    padding: 10px;
+    font-family: Verdana, Arial;
+    font-size: 10px;
+    background-color: #FFFFCC;
+	max-width: 150px;
+	z-index: 10000;
+}
+
+/*
+ * scores display
+ */
+
+.scores{
+	top:255px;
+	left:130px;
+	position: absolute; 
+	height:500px;
+	width: 500px; 
+	background-color:#A0A0A0;
+	border: 1px solid;
+	z-index:500;
+	border-radius : 15px;
+	display:none;
+	text-align:center;
+	webkit-border-radius : 15px;
+	moz-border-radius : 15px;
+}
+
+.scores .close {
+	cursor: pointer;
+	width:20px;
+	position: absolute;
+	top:5px;
+	right:5px;
+}
+
+.scores .title {
+	margin: 10px 0px 0px 0px ;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.scores .player {
+	margin: 0px 0px 10px 0px ;
+	font-weight: bold;
+}
+
+
+.scores table {
+	border:1px solid #000000;
+	border-spacing: 0px; 
+	text-align: center;
+	margin: 5px auto ;
+}
+
+
+
+.scores thead th {
+	background: url(img_tables/bg_th.gif) left;
+	height: 21px;
+	color: #fffafa;
+	font-size: 0.8em;
+	font-weight: bold;
+	padding: 0px 7px;
+	margin: 20px 0px 0px;
+	text-align: center; }
+
+.scores tbody tr {	background: #fffafa; }
+
+.scores tbody tr.odd {	background: #f0f0f0; }
+
+.scores tbody th {
+	background: url(img_tables/arrow_white.gif) left center no-repeat;
+	background-position: 5px;
+	padding-left: 40px !important; }
+
+.scores tbody tr.odd th {
+	background: url(img_tables/arrow_grey.gif) left center no-repeat;
+	background-position: 5px;
+	padding-left: 40px !important; }
+
+.scores tbody th, .scores tbody td {
+	font-size: 0.8em;
+	line-height: 1.2em;
+	color: #252525;
+	padding: 10px 7px;
+}
+
+.scores tbody a {
+	color: #252525;
+	font-weight: bold;
+	text-decoration: none; }
+
+.scores tbody a:hover {
+	color: #fffafa;
+	text-decoration: underline; }
+
+.scores tbody tr:hover th {
+	background: #D44513 url(img_tables/arrow_red.gif) left center no-repeat;
+	background-position: 5px;
+	color: #fffafa; }
+
+.scores tbody tr.odd:hover th {
+	background: #252525 url(img_tables/arrow_black.gif) left center no-repeat;
+	background-position: 5px;
+	color: #fffafa; }
+
+.scores tbody tr:hover th a, tr.odd:hover th a	{
+		 color: #fffafa; }
+
+.scores tbody tr:hover td, tr:hover td a, tr.odd:hover td, tr.odd:hover td a {
+	background: #D44513;
+	color: #fffafa;	 }
+
+.scores tbody tr.odd:hover td, tr.odd:hover td a{
+	background: #252525;
+	color: #fffafa;	 }
+

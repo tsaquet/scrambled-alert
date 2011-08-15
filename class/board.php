@@ -1,5 +1,7 @@
 <?php
-require_once('cell.php');   
+
+require_once('cell.php');
+require_once('scoresManager.php');
 
 class Board
 {
@@ -11,6 +13,7 @@ class Board
 	private $iNbBusyOperators;
 	private $arrOperatorsX;
 	private $arrOperatorsY;
+	
 	// whether the board is wrapped
 	private $bWrapped;
 	private $sState;
@@ -20,13 +23,17 @@ class Board
 	//cells connected to root
 	private $arrToBeUpdatedCells;
 	private $arrConnectingCells;
+	
 	//private $arrNonConnectingCells;
 	private $arrOperators;
 	private $arrOpNbClick;
 	
-	private $level;
+	private $sLevel;
 	
 	private $nbServer;
+	
+	//set in checkServersStatus
+	private $bIsSolved;
 	
 	
 	
@@ -37,11 +44,13 @@ class Board
 	//	$this->arrCells = array();
 	//}
 	
-	public function __construct($sizex,$sizey,$cells,$wrapped,$nbOperators)
+	public function __construct($sizex,$sizey,$cells,$wrapped,$nbOperators,$level)
 	{
 		$this->iSizex = $sizex;
 		$this->iSizey = $sizey;
 		$this->bWrapped = $wrapped;
+		$this->sLevel = $level;
+		$this->bIsSolved = false;
 		if ($nbOperators > 8)
 		{
 			$nbOperators = 8;
@@ -343,7 +352,7 @@ class Board
 		{
 			$win = $win && $server->isConnected();
 		}
-		return $win;
+		$this->bIsSolved = $win;
 	}
 	
 	/**
@@ -352,7 +361,7 @@ class Board
 	 */
 	public function checkStatus($percentSatisfied)
 	{
-		$win = $this->isSolved();
+		$win = $this->bIsSolved;
 		
 		$lost = false;
 		if ($win && $percentSatisfied <= 49)
@@ -363,10 +372,14 @@ class Board
 		
 		if ($lost)
 		{
+			$scoresManager = ScoresManager::get();
+			$scoresManager->lost($_SESSION['user']->id,$this->sLevel);
 			return 'loose';
 		}
 		else if ($win)
 		{
+			$scoresManager = ScoresManager::get();
+			$scoresManager->win($_SESSION['user']->id,$this->sLevel,$_SESSION['nbClic'],$_SESSION['prtSatisfied']);
 			return 'win';
 		}
 		else
@@ -399,12 +412,17 @@ class Board
 			}
 		}
 		
-		return $nbSafe/$nbServ*100;
+		$res = $nbSafe/$nbServ*100;
+		
+		$_SESSION['prtSatisfied'] = $res;
+		
+		return $res;
 		
 	}
 	
 	public function checkServersStatus()
 	{
+		$this->isSolved();
 		$fini = false;
 		// For each cell (double for loop)
 		for ($x = 1 ; $x <= $this->iSizex ; $x++)
@@ -541,7 +559,7 @@ class Board
 				}
 			}
 		}
-		if ($this->isSolved())
+		if ($this->bIsSolved)
 		{
 			for ($k = 1 ; $k <= $this->iNbOperators ; $k++) 
 			{
@@ -703,7 +721,7 @@ class Board
 		{
 			for ($y = 1 ; $y <= $this->iSizey ; $y++)
 			{
-				// the only intersting case is when it's a server
+				// the only interesting case is when it's a server
 				if ($this->arrCells[$x][$y]->getType() == "server")
 				{
 					$count++;

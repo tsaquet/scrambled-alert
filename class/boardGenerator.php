@@ -26,7 +26,7 @@ class BoardGenerator
 			$res = $this->createCells();	
 		}
 		
-		$this->board = new Board($this->currentLevel->getSizeX(),$this->currentLevel->getSizeY(),$this->arrCells,$this->currentLevel->isWrapped(),$this->currentLevel->getOperatorNumber());
+		$this->board = new Board($this->currentLevel->getSizeX(),$this->currentLevel->getSizeY(),$this->arrCells,$this->currentLevel->isWrapped(),$this->currentLevel->getOperatorNumber(),$this->currentLevel->getName());
 		$this->board->randomize();
 	}
 	

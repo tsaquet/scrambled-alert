@@ -153,6 +153,7 @@
 		//echo '<pre>';
 		$_SESSION['board'] = $bGenerator->getBoard();
 		$_SESSION['nbClic'] = 0;
+		$_SESSION['prtSatisfied'] = 0;
 		header('Content-Type: text/xml');
 		echo $buffer;
 		//echo '</pre>';
