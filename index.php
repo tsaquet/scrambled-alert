@@ -95,86 +95,19 @@ else
 			</div>
 		</div>
 		<div id="bubble" class="bubble"></div>
-		<div id="scores" class="scores">
-			<div class="close" onclick="closeScores();">X</div>
-			<p class="title">Tableau des scores</p>
-			<p class="player"><?php echo $_SESSION['user']->first_name." "; 
-					 echo $_SESSION['user']->last_name; ?>
-			</p>
-			
-			<?php
-				$scoresBest = $db->getScoresBest($_SESSION['user']->id);		
-				$scoreRace = $db->getScoresRace($_SESSION['user']->id);	
-			?>
-			
-			<p>
-				<table cellspacing="0" cellpadding="0" width="" border="0">
-					<thead>
-						<tr>
-							<th>Score cumulé</th>
-							<th>Niveau le plus joué</th>
-						</tr>
-					</thead>
-					<tr>
-						<?php echo "<td>".$scoreRace['SRA_SCORE']."</td>"; ?>
-						<?php echo "<td>".$scoreRace['SRA_MOST_PLAYED_LEVEL']."</td>"; ?>
-					</tr>
-				</table>
-			</p>
-			
-			<p>
-				<table cellspacing="0" cellpadding="0" width="" border="0">
-					<thead>
-						<tr>
-							<th>Niveau</th>
-							<th>Score</th>
-							<th>Nb clics</th>
-							<th>% Satisfaction</th>
-							<th>Joués</th>
-							<th>Gagnés</th>
-							<th>Publier</th>
-						</tr>
-					</thead>
-					<?php
-						$i = 0;
-						foreach($scoresBest As $score)
-						{
-							$odd = "";
-							if ($i%2 != 0)
-							{
-								$odd= " class='odd'";
-							}
-							echo "<tr".$odd.">";
-							echo "	<td>".utf8_encode($score['SBE_LEVEL'])."</td>";
-							echo "	<td>".$score['SBE_SCORE']."</td>";
-							echo "	<td>".$score['SBE_NB_CLIC']."</td>";
-							echo "	<td>".$score['SBE_PERCENT_SATISF']."</td>";
-							echo "	<td>".$score['SBE_NB_PLAYED']."</td>";
-							echo "	<td>".$score['SBE_NB_WIN']."</td>";
-							echo "	<td><a href='#'>FB</a></td>";
-							echo "</tr>";
-							$i++;
-						}
-					?> 
-				</table>
-			</p>
-			
-			<p>
-				Comparaison avec les scores des autres
-			</p>
-			
-		</div>
+		<div id="scores" class="scores"></div>
 		<div id="page" class="shell">
 			<div id="fb-root"></div><script type="text/javascript" src="http://connect.facebook.net/en_US/all.js?v=15199"></script>
 			<script type="text/javascript">
-			   FB.init({
-			     appId  : 173509166035359,
-			     status : true,
-			     cookie : true,
-			   });
-			      window.fbAsyncInit = function() {
-			        FB.Canvas.setAutoResize();
-			      }
+				FB.init({
+				    appId  : 173509166035359,
+				    status : true,
+				    cookie : true,
+				});
+			    window.fbAsyncInit = function() 
+			    {
+			    	FB.Canvas.setAutoResize();
+			    }
 			
 			 </script>
 			<header>
@@ -211,7 +144,7 @@ else
 									<li><a href="javascript:ajax('init', 'level=maitre')">Maître</a></li>
 								</ul>
 							</li>
-							<li onmouseover='openScores(); '>
+							<li onclick='openScores(); ' onmouseout='hideBubble();' onmouseover='showBubble("Ouvrir le tableau des scores.")'>
 								<a href="#">Scores</a>
 							</li>
 							<li onmouseout='hideBubble();' onmouseover='showBubble("Version bêta : pas encore disponible") '>
@@ -356,7 +289,10 @@ else
 				</div>
 			</div>
 		</div>
-		<script>document.write(rdads)</script>		
+		<script type="text/javascript">
+			ajax('scores')
+			document.write(rdads)
+		</script>		
     </body>
 </html>
 

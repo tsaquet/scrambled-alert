@@ -438,7 +438,7 @@ class Board
 						$probaToBeCorrupted = 0;
 						if ($this->arrCells[$x][$y]->getServerNbClick() >= 8)
 						{
-							// random between 1 and nb of server + 3
+							// random between 1 and nb of server
 							$probaToBeCorrupted = mt_rand(1,$this->nbServer);
 						}
 						if ($this->arrCells[$x][$y]->getServerNbClick() >= 12)

@@ -8,6 +8,86 @@ function closeScores()
 	document.getElementById('scores').style.display = "none"
 }
 
+/**
+ * Méthode d'affichage des scores
+ */
+function displayScores(response)
+{
+	var first_name = response.getElementsByTagName("usr_first_name")[0].firstChild.nodeValue;
+	var last_name = response.getElementsByTagName("usr_last_name")[0].firstChild.nodeValue;
+	
+	var sra_score = response.getElementsByTagName("sra_score")[0].firstChild.nodeValue;
+	var sra_mpl = response.getElementsByTagName("sra_mpl")[0].firstChild.nodeValue;
+	
+	var sbe_level = new Array();
+	var sbe_score = new Array();
+	var sbe_nb_clic = new Array();
+	var sbe_percent_satisf = new Array();
+	var sbe_nb_played = new Array();
+	var sbe_nb_win = new Array();
+	
+	for (i=0;i<4;i++)
+	{
+		sbe_level[i] = response.getElementsByTagName("sbe_level_"+i)[0].firstChild.nodeValue;
+		sbe_score[i] = response.getElementsByTagName("sbe_score_"+i)[0].firstChild.nodeValue;
+		sbe_nb_clic[i] = response.getElementsByTagName("sbe_nb_clic_"+i)[0].firstChild.nodeValue;
+		sbe_percent_satisf[i] = response.getElementsByTagName("sbe_percent_satisf_"+i)[0].firstChild.nodeValue;
+		sbe_nb_played[i] = response.getElementsByTagName("sbe_nb_played_"+i)[0].firstChild.nodeValue;
+		sbe_nb_win[i] = response.getElementsByTagName("sbe_nb_win_"+i)[0].firstChild.nodeValue;
+	}
+	content = '<div class="close" onclick="closeScores();">X</div>';
+	content += ' 	<p class="title">Tableau des scores</p>';
+	content += ' 	<p class="player">'+first_name+' '+last_name+'</p>';
+	content += ' 	<p>';
+	content += '		<table cellspacing="0" cellpadding="0" width="" border="0">';
+	content += '			<thead>';
+	content += '				<tr>';
+	content += '					<th>Score cumulé</th>';
+	content += '					<th>Niveau le plus joué</th>';
+	content += '				</tr>';
+	content += '			</thead>';
+	content += '			<tr>';
+	content += '				<td>'+sra_score+'</td>';
+	content += '				<td>'+sra_mpl+'</td>';
+	content += '			</tr>';
+	content += '		</table>';
+	content += '	</p>';
+	content += '	<p>';
+	content += '	<table cellspacing="0" cellpadding="0" width="" border="0">';
+	content += '		<thead>';
+	content += '			<tr>';
+	content += '				<th>Niveau</th>';
+	content += '				<th>Score</th>';
+	content += '				<th>Nb clics</th>';
+	content += '				<th>% Satisfaction</th>';
+	content += '				<th>Joués</th>';
+	content += '				<th>Gagnés</th>';
+	content += '				<th>Publier</th>';
+	content += '			</tr>';
+	content += '		</thead>';
+	
+	for(i = 0; i < 4; i++) 
+	{
+		odd = "";
+		modulo = (i % 2);
+		if (modulo != 0)
+		{
+			odd= " class='odd'";
+		}
+		content += '		<tr'+odd+'>';
+		content += '			<td>'+sbe_level[i]+'</td>';
+		content += '			<td>'+sbe_score[i]+'</td>';
+		content += '			<td>'+sbe_nb_clic[i]+'</td>';
+		content += '			<td>'+sbe_percent_satisf[i]+'</td>';
+		content += '			<td>'+sbe_nb_played[i]+'</td>';
+		content += '			<td>'+sbe_nb_win[i]+'</td>';
+		content += '		</tr>';
+	}
+	content += '	</table>';
+			
+	
+	document.getElementById('scores').innerHTML = content;
+}
 
 /**
  * Méthode d'affichage de la présentation du jeu
@@ -289,6 +369,7 @@ function newDisplays(response) {
     if (status[0])
     {
         if (status[0].firstChild.nodeValue == "win" || status[0].firstChild.nodeValue == "loose") {
+        	ajax('scores')
             setTimeout( function() {
                 // Présentation HTML
                 var content = '<div id="endGame">';
