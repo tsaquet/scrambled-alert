@@ -187,6 +187,9 @@ function displayGame(response) {
     }
    
 
+    // Affichage du div de séparation sous l'indicateur de wrap
+    document.getElementById('sep_operator').style.display = "block";
+
     // Création des 3 tableaux qui stoqueront respectivement les directions, les types et les états des cellules
     var col = new Array;
     for (i = 0; i < 3; i++) {

@@ -541,6 +541,10 @@ div.sep {
 	margin-top:20px;
 }
 
+div#sep_operator{
+    display:none;
+}
+
 .bubble{
     position: absolute;   
     visibility : hidden;
