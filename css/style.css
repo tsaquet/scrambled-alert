@@ -393,7 +393,8 @@ div#dissatisfiedUsers {
 
 div#footer {
     text-align: center;
-	color:#FFFAFA ;
+    color:#FFFAFA ;
+    margin-bottom: 5px;
 }
 
 
