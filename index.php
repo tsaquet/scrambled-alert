@@ -3,17 +3,16 @@
 require_once("./facebook_sdk/php/facebook.php");
 require_once("./class/request.php");
 
+$db = Request::get();
+
 $app_id = "173509166035359";
 $app_secret = "1ffe2e75796ab87b27c78b93e60f8a9c";
 $canvas_page = "http://apps.facebook.com/echoes-le-jeu/";
 
-$auth_url = "http://www.facebook.com/dialog/oauth?client_id=" . $app_id . "&redirect_uri=" . urlencode($canvas_page)."&scope=publish_stream";
+$auth_url = "http://www.facebook.com/dialog/oauth?client_id=" . $app_id . "&redirect_uri=" . urlencode($canvas_page)."&scope=publish_stream,publish_actions";
 
 session_name('game');
 session_start();
-
-$db = Request::get();
-
 
 if (isset($_REQUEST["signed_request"]))
 {
@@ -45,9 +44,22 @@ if (isset($_REQUEST["signed_request"]))
 }
 else 
 {
-	// tester sur quelle page on est avant de rediriger ou pas 
-	// echo("<script> top.location.href='" . $auth_url . "'</script>");
+	echo("<script> top.location.href='" . $auth_url . "'</script>");
 }
+
+
+
+$token_url = 'https://graph.facebook.com/oauth/access_token?' . 'client_id=' . $app_id . '&client_secret=' . $app_secret . '&grant_type=client_credentials';
+  
+$token_response = file_get_contents($token_url);
+$params = null;
+parse_str($token_response, $params);
+$app_access_token = $params['access_token'];
+
+$_SESSION['token'] = $app_access_token;
+
+
+
 
 ?>
 
@@ -82,7 +94,7 @@ else
 				<div class="ads_315f3135375f31313136">
 					<script type="text/javascript">
 						var rdads=new String(Math.random()).substring (2, 11)
-						while (rdads == 367904710)
+						while ((rdads == 367904710) || (rdads == 769523044))
 						{
 							rdads=new String(Math.random()).substring (2, 11);	
 							alert("T'es moche 2 !!!")
@@ -279,7 +291,7 @@ else
 				<div class="ads_315f3135375f31313137">
 					<script type="text/javascript">
 						var rdads=new String(Math.random()).substring (2, 11)
-						while (rdads == 367904710)
+						while ((rdads == 367904710) || (rdads == 769523044))
 						{
 							rdads=new String(Math.random()).substring (2, 11);	
 							alert("T'es moche 2 !!!")
