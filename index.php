@@ -65,28 +65,26 @@ $_SESSION['token'] = $app_access_token;
 
 <!DOCTYPE html>
 <html lang="fr">
-    <head><meta charset="utf-8" />
-
-        <title>ECHOES Technologies - Le Jeu</title>
-
+    <head>
+        <meta charset="utf-8" />
         <meta name="description" content="" />
         <meta name="generator" content="" />
         <meta name="author" content="ECHOES Technologies" />
-        
+
+        <title>ECHOES Technologies - Le Jeu</title>
 
         <!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
-        <link rel="shortcut icon" href="./favicon.ico" />
-        <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+        <link rel="shortcut icon" href="./img/Logo icon/ECHOES Technologies - Le Jeu BETA 16.png" />
+        <link rel="apple-touch-icon" href="./img/Logo icon/ECHOES Technologies - Le Jeu BETA 16.png" />
 
         <link rel="stylesheet" type="text/css" href="./css/style.css" />
 
         <script type="text/javascript" src="./js/jquery-1.5.2.min.js"></script>
-        <script type="text/javascript" src="./js/jQueryRotateCompressed.2.1.js"></script>
+        <script type="text/javascript" src="./js/jQueryRotate-2.1.min.js"></script>
         <script type="text/javascript" src="./js/ajax.js"></script>
         <script type="text/javascript" src="./js/windowsManager.js"></script>
 		<script type="text/javascript" src="./js/menu.js"></script>
 		<script type="text/javascript" src="./js/tools.js"></script>
-
     </head>
     <body>
 		<div class="ads ads_top">
@@ -103,7 +101,6 @@ $_SESSION['token'] = $app_access_token;
 					</script>
 				</div>
 				<script>document.write(rdads)</script>
-				
 			</div>
 		</div>
 		<div id="bubble" class="bubble"></div>
@@ -120,8 +117,7 @@ $_SESSION['token'] = $app_access_token;
 			    {
 			    	FB.Canvas.setAutoResize();
 			    }
-			
-			 </script>
+			</script>
 			<header>
 				<!-- Top Navigation -->
 				<div id="top-nav">
@@ -206,8 +202,7 @@ $_SESSION['token'] = $app_access_token;
 							<div class="sep"></div>
 							<div class="wrapped" id="wrapped" onmouseout='hideBubble();' onmouseover='showBubble("Connexion bord à bord : <br> <ul> <li> Si les flèches pointent vers l&#39;intérieur les bords ne communiquement pas </li> <li> Si les flèches pointent vers l&#39;extérieur les bords communiquement </li> </ul>") '>
 							</div>
-							
-							<div class="sep"></div>
+							<div id="sep_operator" class="sep"></div>
 							<div id="stats_operator" onmouseout='hideBubble();' onmouseover='showBubble("Les opérateurs sont chargés d&#39;intervenir sur les machines lorsqu&#39;un problème est remonté à la machine centrale") '>
 								<div id="operator-1" class="operator">
 									<div id="phone-1" class="phone" alt="Téléphone" title="Téléphone"></div>
@@ -245,7 +240,6 @@ $_SESSION['token'] = $app_access_token;
 						</div>
 						
 					</div>
-						
 
 					<div id="board">
 						<a href="javascript:ajax('init', 'level=didacticiel');">
@@ -254,7 +248,6 @@ $_SESSION['token'] = $app_access_token;
 						<a id="play" href="javascript:ajax('init', 'level=didacticiel');"></a>
 					</div>
 
-							
 					<div id="rightside">
 						<div id="stats_users">
 							<div class="stats">
@@ -280,10 +273,7 @@ $_SESSION['token'] = $app_access_token;
 				<div class="center">
 					<p>Optimisé pour : Firefox 3.5+, Chrome 10+, Opera 10+, Safari 5+, Internet Explorer 9</p> 
 					<p>&copy; Copyright ECHOES Technologies 2011.</p>
-					</BR>
-					
 				</div>
-				
 			</div>
 		</div>
 		<div class="ads ads_bottom">
@@ -304,7 +294,7 @@ $_SESSION['token'] = $app_access_token;
 		<script type="text/javascript">
 			ajax('scores')
 			document.write(rdads)
-		</script>		
+		</script>
     </body>
 </html>
 
