@@ -393,7 +393,8 @@ div#dissatisfiedUsers {
 
 div#footer {
     text-align: center;
-	color:#FFFAFA ;
+    color:#FFFAFA ;
+    margin-bottom: 5px;
 }
 
 
@@ -539,6 +540,10 @@ div.sep {
 	border-top:solid 1px;
 	color:#000;
 	margin-top:20px;
+}
+
+div#sep_operator{
+    display:none;
 }
 
 .bubble{
