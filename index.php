@@ -14,6 +14,9 @@ $auth_url = "http://www.facebook.com/dialog/oauth?client_id=" . $app_id . "&redi
 session_name('game');
 session_start();
 
+$code = $_REQUEST["code"]; 
+
+
 if (isset($_REQUEST["signed_request"]))
 {
 	
@@ -29,6 +32,12 @@ if (isset($_REQUEST["signed_request"]))
 	} 
 	else 
 	{
+		if(empty($code)) 
+		{
+	        echo("<script> top.location.href='" . $auth_url ."'</script>");
+      	}
+		$_SESSION['token'] = file_get_contents("https://graph.facebook.com/oauth/access_token?client_id=" . $app_id ."&client_secret=".$app_secret."&redirect_uri=" . urlencode($canvas_page)."&code=".$code);
+		
 		$_SESSION['user'] = json_decode(file_get_contents("http://graph.facebook.com/".$data["user_id"]));	
 		if ($db->userExists($data["user_id"]))
 		{
@@ -46,18 +55,6 @@ else
 {
 	echo("<script> top.location.href='" . $auth_url . "'</script>");
 }
-
-
-
-$token_url = 'https://graph.facebook.com/oauth/access_token?' . 'client_id=' . $app_id . '&client_secret=' . $app_secret . '&grant_type=client_credentials';
-  
-$token_response = file_get_contents($token_url);
-$params = null;
-parse_str($token_response, $params);
-$app_access_token = $params['access_token'];
-
-$_SESSION['token'] = $app_access_token;
-
 
 
 

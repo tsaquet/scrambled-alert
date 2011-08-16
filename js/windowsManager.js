@@ -8,6 +8,11 @@ function closeScores()
 	document.getElementById('scores').style.display = "none"
 }
 
+function displayRes()
+{
+	
+}
+
 /**
  * Méthode d'affichage des scores
  */
@@ -81,6 +86,7 @@ function displayScores(response)
 		content += '			<td>'+sbe_percent_satisf[i]+'</td>';
 		content += '			<td>'+sbe_nb_played[i]+'</td>';
 		content += '			<td>'+sbe_nb_win[i]+'</td>';
+		content += "			<td onclick=javascript:ajax('publish_score','level="+sbe_level[i]+"')>FB</td>";
 		content += '		</tr>';
 	}
 	content += '	</table>';

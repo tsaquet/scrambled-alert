@@ -59,6 +59,10 @@ function ajax(action, args) {
         	fct='displayScores';
         	PHPFile = 'ajax/getScores.php';
         	break;
+        case 'publish_score':
+        	fct='displayRes';
+        	PHPFile = 'ajax/publishScore.php';
+        	break;
         default:
             fct = 'displayGame';
             PHPFile = 'ajax/initBoard.php';

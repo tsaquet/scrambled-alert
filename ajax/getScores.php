@@ -25,6 +25,7 @@ $i = 0;
 
 foreach($scoresBest as $score)
 {
+	$_SESSION['score_level_'.strtolower($score['SBE_LEVEL'])]=$score;
 	$buffer .= '    <best_'.$i.'>
         <sbe_level_'.$i.'>'.utf8_encode($score['SBE_LEVEL']).'</sbe_level_'.$i.'>
         <sbe_score_'.$i.'>'.$score['SBE_SCORE'].'</sbe_score_'.$i.'>
