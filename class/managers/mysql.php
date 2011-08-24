@@ -129,7 +129,7 @@ class DBM
     *           where (column = value as a string)
     *           order (column DIRECTION as a string)
     */
-    public function select($table, $rows = '*', $where = null, $order = null)
+    public function select($table, $rows = '*', $where = null, $order = null, $group=null)
     {
 		if (! $this->link)
 		{
@@ -139,6 +139,8 @@ class DBM
         $q = 'SELECT '.$rows.' FROM '.$table;
         if($where != null)
             $q .= ' WHERE '.$where;
+		if($group != null)
+            $q .= ' GROUP BY '.$group;
         if($order != null)
             $q .= ' ORDER BY '.$order;
 		
@@ -171,6 +173,7 @@ class DBM
         else
         {
         	echo "Erreur lors de l'utilisation de la méthode select.";
+			echo "<br>".$q;
             return false;
         }
     }

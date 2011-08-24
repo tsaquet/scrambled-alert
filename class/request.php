@@ -208,16 +208,31 @@ class Request
 		$this->sql->update('SCORES_RACE',$values , $where); 
 	}
 
-	public function topScoresBest($ids)
+	public function topScoresBest($filtered)
 	{
-		$where = '`SBE_USR_ID` IN (';
-		foreach ($ids as $id)
+		$friendsIds = $this->getFriends();
+		if ($filtered)
 		{
-			$where = $id.',';
+			$where = '`SBE_USR_ID` IN (';
+			foreach ($friendsIds as $id)
+			{
+				$where .= $id.',';
+			}
+			// FPO : C'est TSA qui m'a dit de faire ça.
+			// TSA : et ouais ! et au final on remplace le 0 par l'id du joueur et c'est super utile ;o)
+			$where .= $_SESSION['user']->id.') AND ';
 		}
-		// FPO : C'est TSA qui m'a dit de faire ça.
-		$where .= '0)'; 
-		$this->sql->select('SCORES_BEST', '`SBE_USR_ID`, `SBE_LEVEL`,MAX(`SBE_SCORE`)', $where, '`SBE_LEVEL`,`SBE_USR_ID` ORDER BY `SBE_SCORE` DESC LIMIT 4');
+		else 
+		{
+			$where = "";
+		}
+
+		$where .= ' SBE_SCORE = ( 
+			SELECT MAX(  `SBE_SCORE` ) 
+			FROM SCORES_BEST
+			WHERE SBE_LEVEL = s1.SBE_LEVEL ) ';
+		
+		$this->sql->select('SCORES_BEST s1', '`SBE_USR_ID`, `SBE_LEVEL`,MAX(`SBE_SCORE`) SBE_SCORE', $where, '`SBE_SCORE`,`SBE_USR_ID` DESC LIMIT 4', '`SBE_LEVEL`');
 		if ($this->sql->nbResult() > 0)
 		{
 			return $this->sql->getResult();
@@ -226,6 +241,18 @@ class Request
 		{
 			return false;
 		}
+	}
+	
+	public function getFriends()
+	{
+		$friendsIds = "";
+		$i = 0;
+		foreach ($_SESSION['friends']->data as $friend)
+		{
+			$friendsIds[$i] = $friend->id;
+			$i++;
+		}
+		return $friendsIds;
 	}
 }
 

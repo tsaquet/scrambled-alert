@@ -14,8 +14,10 @@ $auth_url = "http://www.facebook.com/dialog/oauth?client_id=" . $app_id . "&redi
 session_name('game');
 session_start();
 
-$code = $_REQUEST["code"]; 
-
+if (isset($_REQUEST["code"]))
+{
+	$code = $_REQUEST["code"];	
+}
 
 if (isset($_REQUEST["signed_request"]))
 {
@@ -36,9 +38,22 @@ if (isset($_REQUEST["signed_request"]))
 		{
 	        echo("<script> top.location.href='" . $auth_url ."'</script>");
       	}
-		$_SESSION['token'] = file_get_contents("https://graph.facebook.com/oauth/access_token?client_id=" . $app_id ."&client_secret=".$app_secret."&redirect_uri=" . urlencode($canvas_page)."&code=".$code);
+		$_SESSION['token'] = @file_get_contents("https://graph.facebook.com/oauth/access_token?client_id=" . $app_id ."&client_secret=".$app_secret."&redirect_uri=" . urlencode($canvas_page)."&code=".$code);
+		
+		if ($_SESSION['token'] == false)
+		{
+			echo("<script> top.location.href='" . $auth_url . "'</script>");
+		}
+		
+		// TODO : to refactor
+		$token_full = explode("&",$_SESSION['token']);
+		$token = explode("=",$token_full[0]);
+		
 		
 		$_SESSION['user'] = json_decode(file_get_contents("http://graph.facebook.com/".$data["user_id"]));	
+		
+		$_SESSION['friends'] = json_decode(file_get_contents("https://graph.facebook.com/".$data["user_id"]."/friends?".$token_full[0]));
+			
 		if ($db->userExists($data["user_id"]))
 		{
 			$db->updateUserIfNecessary($_SESSION['user']);
@@ -89,15 +104,9 @@ else
 				<div class="ads_315f3135375f31313136">
 					<script type="text/javascript">
 						var rdads=new String(Math.random()).substring (2, 11)
-						while ((rdads == 367904710) || (rdads == 769523044))
-						{
-							rdads=new String(Math.random()).substring (2, 11);	
-							alert("T'es moche 2 !!!")
-						}
 						document.write('<sc'+'ript type="text/javascript" src="http://ads.makemereach.com/tracking/ads_display.php?n=315f3135375f31313136_7e2920f005&rdads='+rdads+'"></sc'+'ript>');
 					</script>
 				</div>
-				<script>document.write(rdads)</script>
 			</div>
 		</div>
 		<div id="bubble" class="bubble"></div>
@@ -273,25 +282,20 @@ else
 				</div>
 			</div>
 		</div>
+		<script type="text/javascript">
+			ajax('scores')
+		</script>
 		<div class="ads ads_bottom">
 			<div class="center">
 				<div class="ads_315f3135375f31313137">
 					<script type="text/javascript">
 						var rdads=new String(Math.random()).substring (2, 11)
-						while ((rdads == 367904710) || (rdads == 769523044))
-						{
-							rdads=new String(Math.random()).substring (2, 11);	
-							alert("T'es moche 2 !!!")
-						}
 						document.write('<sc'+'ript type="text/javascript" src="http://ads.makemereach.com/tracking/ads_display.php?n=315f3135375f31313136_7e2920f005&rdads='+rdads+'"></sc'+'ript>');
 					</script>
 				</div>
 			</div>
 		</div>
-		<script type="text/javascript">
-			ajax('scores')
-			document.write(rdads)
-		</script>
+		
     </body>
 </html>
 

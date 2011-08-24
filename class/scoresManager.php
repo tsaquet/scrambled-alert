@@ -47,7 +47,7 @@ class ScoresManager
 				$base[0] = 10000;
 				$base[1] = 80;
 			    break;
-			case 'maître':
+			case 'maitre':
 				$base[0] = 30000;
 				$base[1] = 150;
 			    break;

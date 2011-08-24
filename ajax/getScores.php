@@ -8,7 +8,11 @@ session_start();
 $db = Request::get();
 
 $scoresBest = $db->getScoresBest($_SESSION['user']->id);
-$scoreRace = $db->getScoresRace($_SESSION['user']->id);	
+$scoreRace = $db->getScoresRace($_SESSION['user']->id);
+
+$topScoresBeyondFriends = $db->topScoresBest(true);	
+$topScores = $db->topScoresBest(false);	
+
 
 $buffer = '<?xml version="1.0" encoding="UTF-8" ?>
 <scores>
@@ -21,8 +25,8 @@ $buffer = '<?xml version="1.0" encoding="UTF-8" ?>
         <sra_mpl>'.$scoreRace['SRA_MOST_PLAYED_LEVEL'].'</sra_mpl>
     </race>
 ';
-$i = 0;
 
+$i = 0;
 foreach($scoresBest as $score)
 {
 	$_SESSION['score_level_'.strtolower($score['SBE_LEVEL'])]=$score;
@@ -34,6 +38,30 @@ foreach($scoresBest as $score)
         <sbe_nb_played_'.$i.'>'.$score['SBE_NB_PLAYED'].'</sbe_nb_played_'.$i.'>
         <sbe_nb_win_'.$i.'>'.$score['SBE_NB_WIN'].'</sbe_nb_win_'.$i.'>
     </best_'.$i.'>
+';
+	$i++;
+}
+
+$i = 0;
+foreach($topScoresBeyondFriends as $top)
+{
+	$buffer .= '    <top_friend_'.$i.'>
+		<sbe_usr_id_'.$i.'>'.$top['SBE_USR_ID'].'</sbe_usr_id_'.$i.'>
+        <sbe_level_'.$i.'>'.utf8_encode($top['SBE_LEVEL']).'</sbe_level_'.$i.'>
+        <sbe_score_'.$i.'>'.$top['SBE_SCORE'].'</sbe_score_'.$i.'>
+    </top_friend_'.$i.'>
+';
+	$i++;
+}
+
+$i = 0;
+foreach($topScores as $top)
+{
+	$buffer .= '    <top_'.$i.'>
+		<sbe_usr_id_'.$i.'>'.$top['SBE_USR_ID'].'</sbe_usr_id_'.$i.'>
+        <sbe_level_'.$i.'>'.utf8_encode($top['SBE_LEVEL']).'</sbe_level_'.$i.'>
+        <sbe_score_'.$i.'>'.$top['SBE_SCORE'].'</sbe_score_'.$i.'>
+    </top_'.$i.'>
 ';
 	$i++;
 }
