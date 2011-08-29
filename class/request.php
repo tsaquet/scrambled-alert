@@ -157,39 +157,41 @@ class Request
 	public function updateScoresBest($id,$level,$win = false,$score = 0,$nbClic = 0,$pourcent = 0)
 	{
 
-		
-		$values['SBE_NB_PLAYED'] = 'SBE_NB_PLAYED + 1';
-		// Si le joueur gagne
-		if ($win)
+		if ($id != '0')
 		{
-			$values['SBE_NB_WIN'] = 'SBE_NB_WIN + 1';
-			//on récupère les anciennes valeurs
-			$this->sql->select('SCORES_BEST', '*', 'SBE_USR_ID = '.$id .' AND UPPER(SBE_LEVEL)= UPPER("'.$level.'")');
-			$result = $this->sql->getResult();
-			//echo "score : " . $result['SBE_SCORE'] ."/".$score."<br>";
-			if ($result['SBE_SCORE'] < $score)
+			$values['SBE_NB_PLAYED'] = 'SBE_NB_PLAYED + 1';
+			// Si le joueur gagne
+			if ($win)
 			{
-				$values['SBE_SCORE'] = $score;
+				$values['SBE_NB_WIN'] = 'SBE_NB_WIN + 1';
+				//on récupère les anciennes valeurs
+				$this->sql->select('SCORES_BEST', '*', 'SBE_USR_ID = '.$id .' AND UPPER(SBE_LEVEL)= UPPER("'.$level.'")');
+				$result = $this->sql->getResult();
+				//echo "score : " . $result['SBE_SCORE'] ."/".$score."<br>";
+				if ($result['SBE_SCORE'] < $score)
+				{
+					$values['SBE_SCORE'] = $score;
+				}
+				//echo "nbClic : " . $result['SBE_NB_CLIC'] ."/".$nbClic."<br>";
+				
+				if (($result['SBE_NB_CLIC'] == 0) || ($result['SBE_NB_CLIC'] > $nbClic))
+				{
+					$values['SBE_NB_CLIC'] = $nbClic;
+				}
+				//echo "pourcent : " . $result['SBE_PERCENT_SATISF'] ."/".$pourcent."<br>";
+				if ($result['SBE_PERCENT_SATISF'] < $pourcent)
+				{
+					$values['SBE_PERCENT_SATISF'] = $pourcent;
+				}
 			}
-			//echo "nbClic : " . $result['SBE_NB_CLIC'] ."/".$nbClic."<br>";
 			
-			if (($result['SBE_NB_CLIC'] == 0) || ($result['SBE_NB_CLIC'] > $nbClic))
-			{
-				$values['SBE_NB_CLIC'] = $nbClic;
-			}
-			//echo "pourcent : " . $result['SBE_PERCENT_SATISF'] ."/".$pourcent."<br>";
-			if ($result['SBE_PERCENT_SATISF'] < $pourcent)
-			{
-				$values['SBE_PERCENT_SATISF'] = $pourcent;
-			}
+			
+			$where[0] = 'SBE_LEVEL';
+			$where[1] = $level;		
+			$where[2] = 'SBE_USR_ID';
+			$where[3] = $id;
+			$this->sql->update('SCORES_BEST',$values , $where,true); 
 		}
-		
-		
-		$where[0] = 'SBE_LEVEL';
-		$where[1] = $level;		
-		$where[2] = 'SBE_USR_ID';
-		$where[3] = $id;
-		$this->sql->update('SCORES_BEST',$values , $where,true); 
 	}
 
     /*
@@ -199,13 +201,18 @@ class Request
      */
 	public function updateScoresRace($id,$score)
 	{
-		$values['SRA_SCORE'] = 'SRA_SCORE + '.$score;
-		$values['SRA_MOST_PLAYED_LEVEL']=$this->sql->select('SCORES_BEST', 'SBE_LEVEL', 'SBE_NB_PLAYED = (SELECT MAX( `SBE_NB_PLAYED` )
-																						   FROM `SCORES_BEST` )
-																		AND SBE_USR_ID = '.$id.' LIMIT 1');
-		$where[0] = 'SRA_USR_ID';
-		$where[1] = $id;
-		$this->sql->update('SCORES_RACE',$values , $where); 
+		if ($id != '0')
+		{
+			$values['SRA_SCORE'] = 'SRA_SCORE + '.$score;
+			$this->sql->select('SCORES_BEST', 'SBE_LEVEL', 'SBE_NB_PLAYED = 
+																	(SELECT MAX( `SBE_NB_PLAYED` ) FROM `SCORES_BEST` WHERE SBE_USR_ID = '.$id.')
+																			AND SBE_USR_ID = '.$id.' LIMIT 1');
+			$res = $this->sql->getResult();
+			$values['SRA_MOST_PLAYED_LEVEL']= "'".$res['SBE_LEVEL']."'";
+			$where[0] = 'SRA_USR_ID';
+			$where[1] = $id;
+			$this->sql->update('SCORES_RACE',$values , $where); 
+		}
 	}
 
 	public function topScoresBest($filtered)

@@ -18,79 +18,168 @@ function displayRes()
  */
 function displayScores(response)
 {
-	var first_name = response.getElementsByTagName("usr_first_name")[0].firstChild.nodeValue;
-	var last_name = response.getElementsByTagName("usr_last_name")[0].firstChild.nodeValue;
-	
-	var sra_score = response.getElementsByTagName("sra_score")[0].firstChild.nodeValue;
-	var sra_mpl = response.getElementsByTagName("sra_mpl")[0].firstChild.nodeValue;
-	
-	var sbe_level = new Array();
-	var sbe_score = new Array();
-	var sbe_nb_clic = new Array();
-	var sbe_percent_satisf = new Array();
-	var sbe_nb_played = new Array();
-	var sbe_nb_win = new Array();
-	
-	for (i=0;i<4;i++)
+	if (response.getElementsByTagName("guest")[0].firstChild.nodeValue == "FALSE")
 	{
-		sbe_level[i] = response.getElementsByTagName("sbe_level_"+i)[0].firstChild.nodeValue;
-		sbe_score[i] = response.getElementsByTagName("sbe_score_"+i)[0].firstChild.nodeValue;
-		sbe_nb_clic[i] = response.getElementsByTagName("sbe_nb_clic_"+i)[0].firstChild.nodeValue;
-		sbe_percent_satisf[i] = response.getElementsByTagName("sbe_percent_satisf_"+i)[0].firstChild.nodeValue;
-		sbe_nb_played[i] = response.getElementsByTagName("sbe_nb_played_"+i)[0].firstChild.nodeValue;
-		sbe_nb_win[i] = response.getElementsByTagName("sbe_nb_win_"+i)[0].firstChild.nodeValue;
-	}
-	content = '<div class="close" onclick="closeScores();">X</div>';
-	content += ' 	<p class="title">Tableau des scores</p>';
-	content += ' 	<p class="player">'+first_name+' '+last_name+'</p>';
-	content += ' 	<p>';
-	content += '		<table cellspacing="0" cellpadding="0" width="" border="0">';
-	content += '			<thead>';
-	content += '				<tr>';
-	content += '					<th>Score cumulé</th>';
-	content += '					<th>Niveau le plus joué</th>';
-	content += '				</tr>';
-	content += '			</thead>';
-	content += '			<tr>';
-	content += '				<td>'+sra_score+'</td>';
-	content += '				<td>'+sra_mpl+'</td>';
-	content += '			</tr>';
-	content += '		</table>';
-	content += '	</p>';
-	content += '	<p>';
-	content += '	<table cellspacing="0" cellpadding="0" width="" border="0">';
-	content += '		<thead>';
-	content += '			<tr>';
-	content += '				<th>Niveau</th>';
-	content += '				<th>Score</th>';
-	content += '				<th>Nb clics</th>';
-	content += '				<th>% Satisfaction</th>';
-	content += '				<th>Joués</th>';
-	content += '				<th>Gagnés</th>';
-	content += '				<th>Publier</th>';
-	content += '			</tr>';
-	content += '		</thead>';
-	
-	for(i = 0; i < 4; i++) 
-	{
-		odd = "";
-		modulo = (i % 2);
-		if (modulo != 0)
+		var first_name = response.getElementsByTagName("usr_first_name")[0].firstChild.nodeValue;
+		var last_name = response.getElementsByTagName("usr_last_name")[0].firstChild.nodeValue;
+		
+		var sra_score = response.getElementsByTagName("sra_score")[0].firstChild.nodeValue;
+		var sra_mpl = response.getElementsByTagName("sra_mpl")[0].firstChild.nodeValue;
+		
+		var sbe_level = new Array();
+		var sbe_score = new Array();
+		var sbe_nb_clic = new Array();
+		var sbe_percent_satisf = new Array();
+		var sbe_nb_played = new Array();
+		var sbe_nb_win = new Array();
+		
+		for (i=0;i<4;i++)
 		{
-			odd= " class='odd'";
+			sbe_level[i] = response.getElementsByTagName("sbe_level_"+i)[0].firstChild.nodeValue;
+			sbe_score[i] = response.getElementsByTagName("sbe_score_"+i)[0].firstChild.nodeValue;
+			sbe_nb_clic[i] = response.getElementsByTagName("sbe_nb_clic_"+i)[0].firstChild.nodeValue;
+			sbe_percent_satisf[i] = response.getElementsByTagName("sbe_percent_satisf_"+i)[0].firstChild.nodeValue;
+			sbe_nb_played[i] = response.getElementsByTagName("sbe_nb_played_"+i)[0].firstChild.nodeValue;
+			sbe_nb_win[i] = response.getElementsByTagName("sbe_nb_win_"+i)[0].firstChild.nodeValue;
 		}
-		content += '		<tr'+odd+'>';
-		content += '			<td>'+sbe_level[i]+'</td>';
-		content += '			<td>'+sbe_score[i]+'</td>';
-		content += '			<td>'+sbe_nb_clic[i]+'</td>';
-		content += '			<td>'+sbe_percent_satisf[i]+'</td>';
-		content += '			<td>'+sbe_nb_played[i]+'</td>';
-		content += '			<td>'+sbe_nb_win[i]+'</td>';
-		content += "			<td onclick=javascript:ajax('publish_score','level="+sbe_level[i]+"')>FB</td>";
+		content = '<div class="close" onclick="closeScores();">X</div>';
+		content += ' 	<p class="title">Tableau des scores</p>';
+		content += ' 	<p class="player">'+first_name+' '+last_name+'</p>';
+		content += ' 	<p>';
+		content += '		<table cellspacing="0" cellpadding="0" width="" border="0">';
+		content += '			<thead>';
+		content += '				<tr>';
+		content += '					<th>Score cumulé</th>';
+		content += '					<th>Niveau le plus joué</th>';
+		content += '				</tr>';
+		content += '			</thead>';
+		content += '			<tr>';
+		content += '				<td>'+sra_score+'</td>';
+		content += '				<td>'+sra_mpl+'</td>';
+		content += '			</tr>';
+		content += '		</table>';
+		content += '	</p>';
+		content += '	<p>';
+		content += '	<table cellspacing="0" cellpadding="0" width="" border="0">';
+		content += '		<thead>';
+		content += '			<tr>';
+		content += '				<th>Niveau</th>';
+		content += '				<th>Score</th>';
+		content += '				<th>Nb clics</th>';
+		content += '				<th>% Satisfaction</th>';
+		content += '				<th>Joués</th>';
+		content += '				<th>Gagnés</th>';
+		content += '				<th>Publier</th>';
+		content += '			</tr>';
+		content += '		</thead>';
+		
+		for(i = 0; i < 4; i++) 
+		{
+			odd = "";
+			modulo = (i % 2);
+			if (modulo != 0)
+			{
+				odd= " class='odd'";
+			}
+			content += '		<tr'+odd+'>';
+			content += '			<td>'+sbe_level[i]+'</td>';
+			content += '			<td>'+sbe_score[i]+'</td>';
+			content += '			<td>'+sbe_nb_clic[i]+'</td>';
+			content += '			<td>'+sbe_percent_satisf[i]+'</td>';
+			content += '			<td>'+sbe_nb_played[i]+'</td>';
+			content += '			<td>'+sbe_nb_win[i]+'</td>';
+			content += "			<td class = 'share' onmouseout='hideBubble();' onmouseover='showBubble(\"Partager sur Facebook\")' onclick=javascript:ajax('publish_score','level="+sbe_level[i]+"')><img alt='FB' src='../img/bullhorn.png'></img></td>";
+			content += '		</tr>';
+		}
+		content += '	</table>';
+		
+		var tf_sbe_usr_img = new Array();
+		var tf_sbe_usr_id = new Array();
+		var tf_sbe_level = new Array();
+		var tf_sbe_score = new Array();
+		
+		for (i=0;i<4;i++)
+		{
+			tf_sbe_usr_img[i] = response.getElementsByTagName("tf_sbe_usr_img_"+i)[0].firstChild.nodeValue;
+			tf_sbe_usr_id[i] = response.getElementsByTagName("tf_sbe_usr_id_"+i)[0].firstChild.nodeValue;
+			tf_sbe_level[i] = response.getElementsByTagName("tf_sbe_level_"+i)[0].firstChild.nodeValue;
+			tf_sbe_score[i] = response.getElementsByTagName("tf_sbe_score_"+i)[0].firstChild.nodeValue;
+		}
+		
+		var t_sbe_usr_img = new Array();
+		var t_sbe_usr_id = new Array();
+		var t_sbe_level = new Array();
+		var t_sbe_score = new Array();
+		
+		for (i=0;i<4;i++)
+		{
+			t_sbe_usr_img[i] = response.getElementsByTagName("t_sbe_usr_img_"+i)[0].firstChild.nodeValue;
+			t_sbe_usr_id[i] = response.getElementsByTagName("t_sbe_usr_id_"+i)[0].firstChild.nodeValue;
+			t_sbe_level[i] = response.getElementsByTagName("t_sbe_level_"+i)[0].firstChild.nodeValue;
+			t_sbe_score[i] = response.getElementsByTagName("t_sbe_score_"+i)[0].firstChild.nodeValue;
+		}
+		
+		content += '	<div class="topscores" id="friends">';
+		content += '	<p class="top">Top amis : </p><table>';
+		content += '		<tr>';
+		content += '			<td>Niveau</td>';
+		content += '			<td>'+tf_sbe_level[0]+'</td>';
+		content += '			<td>'+tf_sbe_level[1]+'</td>';
+		content += '			<td>'+tf_sbe_level[2]+'</td>';
+		content += '			<td>'+tf_sbe_level[3]+'</td>';
 		content += '		</tr>';
+		content += '		<tr class="odd">';
+		content += '			<td>Joueur</td>';
+		content += '			<td><a href="http://www.facebook.com/'+tf_sbe_usr_id[0]+'" target="_blank"><img alt='+tf_sbe_usr_id[0]+' src='+tf_sbe_usr_img[0]+' ></img></a></td>';
+		content += '			<td><a href="http://www.facebook.com/'+tf_sbe_usr_id[1]+'" target="_blank"><img alt='+tf_sbe_usr_id[1]+' src='+tf_sbe_usr_img[1]+' ></img></a></td>';
+		content += '			<td><a href="http://www.facebook.com/'+tf_sbe_usr_id[2]+'" target="_blank"><img alt='+tf_sbe_usr_id[2]+' src='+tf_sbe_usr_img[2]+' ></img></a></td>';
+		content += '			<td><a href="http://www.facebook.com/'+tf_sbe_usr_id[3]+'" target="_blank"><img alt='+tf_sbe_usr_id[3]+' src='+tf_sbe_usr_img[3]+' ></img></a></td>';
+		content += '		</tr>';
+		content += '		<tr>';
+		content += '			<td>Score</td>';
+		content += '			<td>'+tf_sbe_score[0]+'</td>';
+		content += '			<td>'+tf_sbe_score[1]+'</td>';
+		content += '			<td>'+tf_sbe_score[2]+'</td>';
+		content += '			<td>'+tf_sbe_score[3]+'</td>';
+		content += '		</tr>';
+		content += '	</table>';
+		content += '	</div>';
+	
+		content += '	<div class="topscores" id="world">';			
+		content += '	<p class="top">Top monde : </p><table>';
+		content += '		<tr>';
+		content += '			<td>Niveau</td>';
+		content += '			<td>'+t_sbe_level[0]+'</td>';
+		content += '			<td>'+t_sbe_level[1]+'</td>';
+		content += '			<td>'+t_sbe_level[2]+'</td>';
+		content += '			<td>'+t_sbe_level[3]+'</td>';
+		content += '		</tr>';
+		content += '		<tr class="odd">';
+		content += '			<td>Joueur</td>';
+		content += '			<td><a href="http://www.facebook.com/'+t_sbe_usr_id[0]+'" target="_blank"><img alt='+t_sbe_usr_id[0]+' src='+t_sbe_usr_img[0]+' ></img></a></td>';
+		content += '			<td><a href="http://www.facebook.com/'+t_sbe_usr_id[1]+'" target="_blank"><img alt='+t_sbe_usr_id[1]+' src='+t_sbe_usr_img[1]+' ></img></a></td>';
+		content += '			<td><a href="http://www.facebook.com/'+t_sbe_usr_id[2]+'" target="_blank"><img alt='+t_sbe_usr_id[2]+' src='+t_sbe_usr_img[2]+' ></img></a></td>';
+		content += '			<td><a href="http://www.facebook.com/'+t_sbe_usr_id[3]+'" target="_blank"><img alt='+t_sbe_usr_id[3]+' src='+t_sbe_usr_img[3]+' ></img></a></td>';
+		content += '		</tr>';
+		content += '		<tr>';
+		content += '			<td>Score</td>';
+		content += '			<td>'+t_sbe_score[0]+'</td>';
+		content += '			<td>'+t_sbe_score[1]+'</td>';
+		content += '			<td>'+t_sbe_score[2]+'</td>';
+		content += '			<td>'+t_sbe_score[3]+'</td>';
+		content += '		</tr>';
+		content += '	</table>';
+		content += '	</div>';
 	}
-	content += '	</table>';
-			
+	else
+	{
+		var first_name = response.getElementsByTagName("usr_first_name")[0].firstChild.nodeValue;
+		content = '<div class="close" onclick="closeScores();">X</div>';
+		content += ' 	<p class="title">Tableau des scores</p>';
+		content += ' 	<p class="player">'+first_name+'</p>';
+		content += ' 	<p class="player">Indisponible, connectez-vous à Facebook pour bénéficier du système de score.</p>';
+	}
+	
 	
 	document.getElementById('scores').innerHTML = content;
 }

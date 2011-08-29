@@ -146,6 +146,15 @@ class DBM
 		
 		//print_r($q);
         $this->quest = mysql_query($q);
+		
+		
+		/*$monfichier = fopen('../class/managers/debug.txt', 'a+');
+		 
+		fseek($monfichier, 0);
+		fputs($monfichier, $q.PHP_EOL); 
+		 
+		fclose($monfichier);*/
+		 
 
         if($this->quest)
         {

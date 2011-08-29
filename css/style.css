@@ -50,7 +50,17 @@ img {
 #top-nav ul li.home a { background: none; width: 67px; height: 31px; line-height: 29px; padding: 0; color: #141414; font-weight: bold; padding-left: 21px; }
 
 
+.pointer
+{
+	cursor : pointer;
+}
 
+.login
+{
+	position : relative;
+	left : 580px;
+	top : 53px;
+}
 
 
 /* Menu d�roulant */
@@ -565,9 +575,9 @@ div#sep_operator{
 	top:255px;
 	left:130px;
 	position: absolute; 
-	height:500px;
+	height:535px;
 	width: 500px; 
-	background-color:#A0A0A0;
+	background-color:#C3C6CD;
 	border: 1px solid;
 	z-index:500;
 	border-radius : 15px;
@@ -596,12 +606,42 @@ div#sep_operator{
 	font-weight: bold;
 }
 
+.scores .top {
+	margin: 3px 0px 7px 0px ;
+	font-weight: bold;
+	position: relative;
+	top:70px;
+	left: 10px;
+	width:80px;
+}
+
+.scores .topscores
+{
+	position : relative;	
+}
+
+
+.scores #friends
+{
+	top : -20px;	
+}
+
+.scores #world
+{
+	top : -40px;
+}
+
+.scores .share
+{
+	cursor : pointer;
+}
+
 
 .scores table {
 	border:1px solid #000000;
 	border-spacing: 0px; 
 	text-align: center;
-	margin: 5px auto ;
+	margin: 6px auto ;
 }
 
 
@@ -634,7 +674,7 @@ div#sep_operator{
 	font-size: 0.8em;
 	line-height: 1.2em;
 	color: #252525;
-	padding: 10px 7px;
+	padding: 7px 7px;
 }
 
 .scores tbody a {

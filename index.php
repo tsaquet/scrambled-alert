@@ -13,31 +13,32 @@ $auth_url = "http://www.facebook.com/dialog/oauth?client_id=" . $app_id . "&redi
 
 session_name('game');
 session_start();
+ 
+$facebook = new Facebook(array(  'appId'  => $app_id,  'secret' => $app_secret,  'cookie' => true,));    
+$session = $facebook->getSession();    
+$me = null;    
 
-if (isset($_REQUEST["code"]))
-{
-	$code = $_REQUEST["code"];	
-}
-
-if (isset($_REQUEST["signed_request"]))
-{
+if($session)
+{    
+	if (isset($_REQUEST["code"]))
+	{
+		$code = $_REQUEST["code"];	
+	}
 	
-	$signed_request = $_REQUEST["signed_request"];
-
-	list($encoded_sig, $payload) = explode('.', $signed_request, 2); 
-
-	$data = json_decode(base64_decode(strtr($payload, '-_', '+/')), true);
-
-	if (empty($data["user_id"])) 
+	if (isset($_REQUEST["signed_request"]))
 	{
-		echo("<script> top.location.href='" . $auth_url . "'</script>");
-	} 
-	else 
-	{
+		
+		$signed_request = $_REQUEST["signed_request"];
+	
+		list($encoded_sig, $payload) = explode('.', $signed_request, 2); 
+	
+		$data = json_decode(base64_decode(strtr($payload, '-_', '+/')), true);
+	
+	
 		if(empty($code)) 
 		{
 	        echo("<script> top.location.href='" . $auth_url ."'</script>");
-      	}
+	  	}
 		$_SESSION['token'] = @file_get_contents("https://graph.facebook.com/oauth/access_token?client_id=" . $app_id ."&client_secret=".$app_secret."&redirect_uri=" . urlencode($canvas_page)."&code=".$code);
 		
 		if ($_SESSION['token'] == false)
@@ -49,10 +50,9 @@ if (isset($_REQUEST["signed_request"]))
 		$token_full = explode("&",$_SESSION['token']);
 		$token = explode("=",$token_full[0]);
 		
-		
-		$_SESSION['user'] = json_decode(file_get_contents("http://graph.facebook.com/".$data["user_id"]));	
-		
-		$_SESSION['friends'] = json_decode(file_get_contents("https://graph.facebook.com/".$data["user_id"]."/friends?".$token_full[0]));
+		$_SESSION['user'] = json_decode(@file_get_contents("http://graph.facebook.com/".$data["user_id"]));	
+		$_SESSION['friends'] = json_decode(@file_get_contents("https://graph.facebook.com/".$data["user_id"]."/friends?".$token_full[0]));
+
 			
 		if ($db->userExists($data["user_id"]))
 		{
@@ -62,14 +62,43 @@ if (isset($_REQUEST["signed_request"]))
 		{
 			$db->addUser($_SESSION['user']);
 		}
-		
-		
+			
+			
 	}
-}
+	else 
+	{
+		echo("<script> top.location.href='" . $auth_url ."'</script>");
+	}
+} 
 else 
 {
-	echo("<script> top.location.href='" . $auth_url . "'</script>");
+	$_SESSION['user'] = 
+	json_decode('{
+	   "id": "0",
+	   "name": "Guest",
+	   "first_name": "Guest",
+	   "last_name": "",
+	   "link": "http://www.facebook.com/0",
+	   "username": "",
+	   "gender": "",
+	   "locale": ""
+	}');
+	$_SESSION['friends']= json_decode('{
+		  "data": [
+		  ]
+		}');
+	$data["user_id"] = 0;
+	if ($db->userExists($data["user_id"]))
+	{
+		$db->updateUserIfNecessary($_SESSION['user']);
+	}
+	else
+	{
+		$db->addUser($_SESSION['user']);
+	}		
 }
+
+
 
 
 
@@ -138,6 +167,9 @@ else
 				<div class="logo">
 					<img src='./img/headline.png' />
 				</div>
+				<div class="login">
+					<div id="fb-root"></div><script src="http://connect.facebook.net/en_US/all.js#appId="<?php echo $app_id; ?>."&amp;xfbml=1"></script><fb:login-button show-faces="false" width="200" max-rows="1"></fb:login-button>
+				</div>
 			</header>
 		
 
@@ -158,7 +190,7 @@ else
 								<li><a href="javascript:ajax('init', 'level=maitre')">Maître</a></li>
 							</ul>
 						</li>
-						<li onclick='openScores(); ' onmouseout='hideBubble();' onmouseover='showBubble("Ouvrir le tableau des scores.")'>
+						<li class="pointer" onclick='openScores(); ' onmouseout='hideBubble();' onmouseover='showBubble("Ouvrir le tableau des scores.")'>
 							<a>Scores</a>
 						</li>
 						<li onmouseout='hideBubble();' onmouseover='showBubble("Version bêta : pas encore disponible") '>
