@@ -14,7 +14,7 @@ $auth_url = "http://www.facebook.com/dialog/oauth?client_id=" . $app_id . "&redi
 session_name('game');
 session_start();
  
-$facebook = new Facebook(array(  'appId'  => $app_id,  'secret' => $app_secret,  'cookie' => true,));    
+$facebook = new Facebook(array(  'appId'  => $app_id,  'secret' => $app_secret,  'cookie' => false,));    
 $session = $facebook->getSession();    
 $me = null;    
 
