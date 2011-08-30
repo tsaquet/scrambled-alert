@@ -88,7 +88,7 @@ function displayScores(response)
 			content += '			<td>'+sbe_percent_satisf[i]+'</td>';
 			content += '			<td>'+sbe_nb_played[i]+'</td>';
 			content += '			<td>'+sbe_nb_win[i]+'</td>';
-			content += "			<td class = 'share' onmouseout='hideBubble();' onmouseover='showBubble(\"Partager sur Facebook\")' onclick=javascript:ajax('publish_score','level="+sbe_level[i]+"')><img alt='FB' src='../img/bullhorn.png'></img></td>";
+			content += "			<td class = 'share' onmouseout='hideBubble();' onmouseover='showBubble(\"Partager sur Facebook\")' onclick=javascript:ajax('publish_score','level="+sbe_level[i]+"')><img alt='FB' src='./img/bullhorn.png'></img></td>";
 			content += '		</tr>';
 		}
 		content += '	</table>';
