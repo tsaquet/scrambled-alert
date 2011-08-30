@@ -115,7 +115,7 @@ class Request
 		{
 			$values[$i] = 0;
 		}
-		$values[3] = '';
+		$values[3] = 'Didacticiel';
 		$this->sql->insert('SCORES_RACE',$values);
 	}
 
