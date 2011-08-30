@@ -228,16 +228,18 @@ class Request
 			// FPO : C'est TSA qui m'a dit de faire ça.
 			// TSA : et ouais ! et au final on remplace le 0 par l'id du joueur et c'est super utile ;o)
 			$where .= $_SESSION['user']->id.') AND ';
+			$filter = $where;
 		}
 		else 
 		{
 			$where = "";
+			$filter = "";
 		}
 
 		$where .= ' SBE_SCORE = ( 
 			SELECT MAX(  `SBE_SCORE` ) 
 			FROM SCORES_BEST
-			WHERE SBE_LEVEL = s1.SBE_LEVEL ) ';
+			WHERE '.$filter.'SBE_LEVEL = s1.SBE_LEVEL ) ';
 		
 		$this->sql->select('SCORES_BEST s1', '`SBE_USR_ID`, `SBE_LEVEL`,MAX(`SBE_SCORE`) SBE_SCORE', $where, '`SBE_SCORE`,`SBE_USR_ID` LIMIT 4', '`SBE_LEVEL`');
 		if ($this->sql->nbResult() > 0)
