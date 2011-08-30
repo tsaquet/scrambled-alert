@@ -1,6 +1,8 @@
 <?php
 
 require_once("request.php");
+require_once("tools.php");
+
 
 class ScoresManager
 {
@@ -63,6 +65,13 @@ class ScoresManager
 		$score = $base[0] + $bonusClick + ($prtSatisfied * $base[0]) / 100;
 		$this->request->updateScoresBest($id,$level,true,$score,$nbClic,$prtSatisfied);
 		$this->request->updateScoresRace($id,$score/10);
+		$res = $this->request->getScoreRace($id);
+		
+		$token = explode("=",$_SESSION['app_token']);
+		
+		https_post_score($token[1],$res['SRA_SCORE']);		
+				
+
 	}
 }
 

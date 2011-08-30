@@ -239,7 +239,7 @@ class Request
 			FROM SCORES_BEST
 			WHERE SBE_LEVEL = s1.SBE_LEVEL ) ';
 		
-		$this->sql->select('SCORES_BEST s1', '`SBE_USR_ID`, `SBE_LEVEL`,MAX(`SBE_SCORE`) SBE_SCORE', $where, '`SBE_SCORE`,`SBE_USR_ID` DESC LIMIT 4', '`SBE_LEVEL`');
+		$this->sql->select('SCORES_BEST s1', '`SBE_USR_ID`, `SBE_LEVEL`,MAX(`SBE_SCORE`) SBE_SCORE', $where, '`SBE_SCORE`,`SBE_USR_ID` LIMIT 4', '`SBE_LEVEL`');
 		if ($this->sql->nbResult() > 0)
 		{
 			return $this->sql->getResult();
@@ -260,6 +260,19 @@ class Request
 			$i++;
 		}
 		return $friendsIds;
+	}
+	
+	public function getScoreRace($id)
+	{
+		$this->sql->select('SCORES_RACE', 'SRA_SCORE', 'SRA_USR_ID = "'.$id.'"');
+		if ($this->sql->nbResult() > 0)
+		{
+			return $this->sql->getResult();
+		}
+		else 
+		{
+			return false;
+		}
 	}
 }
 

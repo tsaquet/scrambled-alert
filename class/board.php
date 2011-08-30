@@ -453,7 +453,7 @@ class Board
 							{
 								for ($y1 = 1 ; $y1 <= $this->iSizey ; $y1++)
 								{
-									$this->arrCells[$x1][$y1]->setServerNbClick(0);
+									$this->arrCells[$x1][$y1]->setServerNbClick(mt_rand(0,8));
 								}
 							}
 							$res = array();

@@ -66,7 +66,7 @@ Class xmlParser
 		
 		//print_r("wrap = ".$wrapped);
 		
-		return new Board($width,$length,$arrCells,$wrapped,$nbOperators);
+		return new Board($width,$length,$arrCells,$wrapped,$nbOperators,'Didacticiel');
 	}
 	
 	

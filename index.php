@@ -14,9 +14,8 @@ $auth_url = "http://www.facebook.com/dialog/oauth?client_id=" . $app_id . "&redi
 session_name('game');
 session_start();
  
-$facebook = new Facebook(array(  'appId'  => $app_id,  'secret' => $app_secret,  'cookie' => false,));    
+$facebook = new Facebook(array(  'appId'  => $app_id,  'secret' => $app_secret,  'cookie' => true,));    
 $session = $facebook->getSession();    
-$me = null;    
 
 if($session)
 {    
@@ -40,6 +39,8 @@ if($session)
 	        echo("<script> top.location.href='" . $auth_url ."'</script>");
 	  	}
 		$_SESSION['token'] = @file_get_contents("https://graph.facebook.com/oauth/access_token?client_id=" . $app_id ."&client_secret=".$app_secret."&redirect_uri=" . urlencode($canvas_page)."&code=".$code);
+		
+		$_SESSION['app_token'] = @file_get_contents("https://graph.facebook.com/oauth/access_token?client_id=" . $app_id ."&client_secret=".$app_secret."&grant_type=client_credentials");
 		
 		if ($_SESSION['token'] == false)
 		{
@@ -72,6 +73,12 @@ if($session)
 } 
 else 
 {
+	
+	echo 
+	(
+		'<script type="text/javascript" src="//www.facebook.com/thomas.saquet" onload=isLoggedIntoFb("'.$auth_url.'") async="async"></script>'
+	);
+ 	
 	$_SESSION['user'] = 
 	json_decode('{
 	   "id": "0",
@@ -97,10 +104,6 @@ else
 		$db->addUser($_SESSION['user']);
 	}		
 }
-
-
-
-
 
 ?>
 
@@ -166,9 +169,6 @@ else
 				</div>
 				<div class="logo">
 					<img src='./img/headline.png' />
-				</div>
-				<div class="login">
-					<div id="fb-root"></div><script src="http://connect.facebook.net/en_US/all.js#appId="<?php echo $app_id; ?>."&amp;xfbml=1"></script><fb:login-button show-faces="false" width="200" max-rows="1"></fb:login-button>
 				</div>
 			</header>
 		

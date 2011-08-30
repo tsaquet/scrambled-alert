@@ -72,3 +72,8 @@ function hideBubble()
 }
 
 document.onmousemove=move;
+
+function isLoggedIntoFb(auth_url)
+{
+	top.location.href=auth_url;
+}

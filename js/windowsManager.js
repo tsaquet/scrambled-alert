@@ -33,7 +33,7 @@ function displayScores(response)
 		var sbe_nb_played = new Array();
 		var sbe_nb_win = new Array();
 		
-		for (i=0;i<4;i++)
+		for (i=3;i>=0;i--)
 		{
 			sbe_level[i] = response.getElementsByTagName("sbe_level_"+i)[0].firstChild.nodeValue;
 			sbe_score[i] = response.getElementsByTagName("sbe_score_"+i)[0].firstChild.nodeValue;
@@ -46,7 +46,7 @@ function displayScores(response)
 		content += ' 	<p class="title">Tableau des scores</p>';
 		content += ' 	<p class="player">'+first_name+' '+last_name+'</p>';
 		content += ' 	<p>';
-		content += '		<table cellspacing="0" cellpadding="0" width="" border="0">';
+		content += '		<table id="first" cellspacing="0" cellpadding="0" width="" border="0">';
 		content += '			<thead>';
 		content += '				<tr>';
 		content += '					<th>Score cumulé</th>';
@@ -73,7 +73,7 @@ function displayScores(response)
 		content += '			</tr>';
 		content += '		</thead>';
 		
-		for(i = 0; i < 4; i++) 
+		for (i=3;i>=0;i--) 
 		{
 			odd = "";
 			modulo = (i % 2);
@@ -262,6 +262,9 @@ function displayPresentation(response) {
 function displayGame(response) {
     // Réinitialisation du nombre de clics
     document.getElementById('spanNbClick').innerHTML = nbClick;
+    
+    //on ferme le panneau des scores si jamais il était ouvert
+    document.getElementById('scores').style.display = "none"
 
     // Récupération des dimensions du plateau
     var dimensions = response.getElementsByTagName("dimensions");
@@ -487,12 +490,12 @@ function newDisplays(response) {
                         case '2':
                             content += '<p>On augmente encore un peu la difficulté ?</p> \
                                         <p>Plus de serveurs = plus de variation d\'humeur des clients.</p> \
-                                        <p>Il ne va pas falloir laisser le curseur en bas à droite tomber définitivement dans le rouge.</p>';
+                                        <p>Il ne va pas falloir laisser le curseur à droite tomber définitivement dans le rouge.</p>';
                             level++;
                             break;
                         case '3':
                             level++;
-                            content += '<p>Le personnage en haut à droite avec son téléphone est un opérateur.</p> \
+                            content += '<p>Le personnage en bas à gauche avec son téléphone est un opérateur.</p> \
                                         <p>C\'est lui qui est chargé de réparer les serveurs une fois qu\'ils sont découverts comme étant corrompus.</p> \
                                         <p>Pour la prochaine partie, il y aura deux opérateurs.</p> \
                                         <p>Les résolutions de problèmes seront ainsi plus rapides.</p>';

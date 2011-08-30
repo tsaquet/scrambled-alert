@@ -23,22 +23,22 @@
 		}
 		else if ($_POST['level'] == 'novice')
 		{
-			$level = new Level($_POST['level'],4,4,false,3,2);
+			$level = new Level($_POST['level'],4,4,false,3,1);
 			init($level);
 		}
 		else if ($_POST['level'] == 'normal')
 		{
-			$level = new Level($_POST['level'],6,6,false,3,1);
+			$level = new Level($_POST['level'],6,6,false,3,2);
 			init($level);
 		}
 		else if ($_POST['level'] == 'expert')
 		{
-			$level = new Level($_POST['level'],8,7,true,4,1);
+			$level = new Level($_POST['level'],8,7,true,4,3);
 			init($level);
 		}
 		else if ($_POST['level'] == 'maitre')
 		{
-			$level = new Level($_POST['level'],9,9,true,4,2);
+			$level = new Level($_POST['level'],9,9,true,4,3);
 			init($level);
 		}
 		else

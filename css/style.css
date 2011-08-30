@@ -497,7 +497,7 @@ div.space {
     width: 16px;
     height: 11px;
     right: 40px;
-	top:1px;
+	top:12px;
 	position: absolute;
     background-image: url("../img/ajax-loader.gif");
 }
@@ -641,7 +641,10 @@ div#sep_operator{
 	border:1px solid #000000;
 	border-spacing: 0px; 
 	text-align: center;
-	margin: 6px auto ;
+}
+
+.scores #first {
+	margin: 4px auto ;
 }
 
 
