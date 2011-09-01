@@ -212,7 +212,6 @@ class DBM
             }
             $values = implode(',',$values);
             $insert .= ' VALUES ('.$values.')';
-
             $ins = mysql_query($insert);
 
             if($ins)

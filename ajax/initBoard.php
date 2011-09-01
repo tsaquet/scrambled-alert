@@ -4,12 +4,16 @@
 	require_once('../class/boardGenerator.php');
 	require_once('../class/level.php');
 	require_once('../class/xmlParser.php');
+	require_once("../class/request.php");
 	
 	session_name('game');
 	session_start();
 	
+	$db = Request::get();
+	
 	if (isset($_POST['level']))
 	{
+		$db->log('init_board, level : '.$_POST['level']);
 		if (is_int(intval($_POST['level'])) && (intval($_POST['level']) > 0))
 		{
 			initTuto($_POST['level']);	
@@ -48,6 +52,7 @@
 	}
 	else
 	{
+		$db->log('init_board, tuto');
 		initTuto(1);
 		$handle = fopen('../levels/level1.xml', "r" );
 		while (!feof($handle)) 
@@ -154,6 +159,7 @@
 		$_SESSION['board'] = $bGenerator->getBoard();
 		$_SESSION['nbClic'] = 0;
 		$_SESSION['prtSatisfied'] = 0;
+		
 		header('Content-Type: text/xml');
 		echo $buffer;
 		//echo '</pre>';

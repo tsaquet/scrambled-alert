@@ -58,15 +58,34 @@ class Request
 	public function updateUserIfNecessary($user)
 	{
 		$result = $this->sql->getResult();
+		
+		$first_name = "";
+		if (isset($user->first_name))
+		{
+			$first_name = $user->first_name;
+		}
+		
+		$last_name = "";
+		if (isset($user->last_name))
+		{
+			$last_name = $user->last_name;
+		}
+		
+		$username = "";
+		if (isset($user->username))
+		{
+			$username = $user->username;
+		}
+		
 		if (($result['USR_NAME'] != $user->name) ||
-			($result['USR_FIRST_NAME'] != $user->first_name) ||
-			($result['USR_LAST_NAME'] != $user->last_name) ||
-			($result['USR_USERNAME'] != $user->username))
+			($result['USR_FIRST_NAME'] != $first_name) ||
+			($result['USR_LAST_NAME'] != $last_name) ||
+			($result['USR_USERNAME'] != $username))
 		{
 			$values['USR_NAME'] = $user->name;
-			$values['USR_FIRST_NAME'] = $user->first_name;
-			$values['USR_LAST_NAME'] = $user->last_name;
-			$values['USR_USERNAME'] = $user->username;
+			$values['USR_FIRST_NAME'] = $first_name;
+			$values['USR_LAST_NAME'] = $last_name;
+			$values['USR_USERNAME'] = $username;
 			
 			$where[0] = 'USR_ID';
 			$where[1] = $user->id;
@@ -78,9 +97,21 @@ class Request
 	{
 		$values[0] = $user->id;
 		$values[1] = $user->name;
-		$values[2] = $user->first_name;
-		$values[3] = $user->last_name;
-		$values[4] = $user->username;
+		$values[2] = "";
+		if (isset($user->first_name))
+		{
+			$values[2] = $user->first_name;
+		}
+		$values[3] = "";
+		if (isset($user->last_name))
+		{
+			$values[3] = $user->last_name;
+		}
+		$values[4] = "";
+		if (isset($user->username))
+		{
+			$values[4] = $user->username;
+		}
 		$this->sql->insert('USERS',$values);
 		$this->initScoresBest($user->id);
 		$this->initScoresRace($user->id);
@@ -227,7 +258,8 @@ class Request
 			}
 			// FPO : C'est TSA qui m'a dit de faire ça.
 			// TSA : et ouais ! et au final on remplace le 0 par l'id du joueur et c'est super utile ;o)
-			$where .= $_SESSION['user']->id.') AND ';
+			// TSA : au final le 0 est utile, c'est le guest qui 0 partout ^^
+			$where .= '0) AND ';
 			$filter = $where;
 		}
 		else 
@@ -255,7 +287,10 @@ class Request
 	public function getFriends()
 	{
 		$friendsIds = "";
-		$i = 0;
+		
+		$friendsIds[0] = $_SESSION['user']->id;
+		
+		$i = 1;
 		foreach ($_SESSION['friends']->data as $friend)
 		{
 			$friendsIds[$i] = $friend->id;
@@ -275,6 +310,11 @@ class Request
 		{
 			return false;
 		}
+	}
+
+	public function log($msg)
+	{
+		$this->sql->query("INSERT INTO LOGS VALUES (".$_SESSION['user']->id.",'".$_SERVER['REMOTE_ADDR']."',NOW(),'".$msg."');");
 	}
 }
 

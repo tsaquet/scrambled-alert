@@ -84,14 +84,25 @@ if ($_SESSION['user']->id != 0)
 	
 	$buffer .= '</scores>';
 }
-else
+elseif ($_SESSION['user']->id == 0)
 {
 	$buffer = '<?xml version="1.0" encoding="UTF-8" ?>
 	<scores>
 		<guest>TRUE</guest>
 	    <user>
 	        <usr_first_name>'.$_SESSION['user']->first_name.'</usr_first_name>
-	        <usr_last_name>'.$_SESSION['user']->last_name.'</usr_last_name>
+	        <usr_last_name></usr_last_name>
+	    </user>
+	</scores>';
+}
+else
+{
+	$buffer = '<?xml version="1.0" encoding="UTF-8" ?>
+	<scores>
+		<guest>TRUE</guest>
+	    <user>
+	        <usr_first_name>Guest</usr_first_name>
+	        <usr_last_name></usr_last_name>
 	    </user>
 	</scores>';
 }

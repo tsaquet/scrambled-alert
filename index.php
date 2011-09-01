@@ -105,6 +105,8 @@ else
 	}		
 }
 
+$db->log('index');
+
 ?>
 
 <!DOCTYPE html>
@@ -322,7 +324,7 @@ else
 				<div class="ads_315f3135375f31313137">
 					<script type="text/javascript">
 						var rdads=new String(Math.random()).substring (2, 11)
-						document.write('<sc'+'ript type="text/javascript" src="http://ads.makemereach.com/tracking/ads_display.php?n=315f3135375f31313136_7e2920f005&rdads='+rdads+'"></sc'+'ript>');
+						document.write('<sc'+'ript type="text/javascript" src="http://ads.makemereach.com/tracking/ads_display.php?n=315f3135375f31313137_efb2a78165&rdads='+rdads+'"></sc'+'ript>');
 					</script>
 				</div>
 			</div>

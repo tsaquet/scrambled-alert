@@ -25,7 +25,7 @@ $content = array(
 											   'tbody' => array ('cell server disconnected', 'cell server safe', 'cell server corrupted')))),
 				 array('title' => 'Intervention',
 					   'sentence' => array('Lorsqu\'un nouveau serveur compromis est détecté, un opérateur disponible intervient.',
-				  						   'Ceci se fait, cette fois, sans opération de votre part puisque l\'opérateur à reçu toutes les informations nécessaires sur son smartphone.',
+				  						   'Ceci se fait, cette fois, sans opération de votre part puisque l\'opérateur a reçu toutes les informations nécessaires sur son smartphone.',
 				  						   'Après un temps d\'intervention, ce serveur devient sain. Toutefois, si tous les membres de votre équipe sont occupés, le serveur restera compromis jusqu\'à ce qu\'un opérateur se libère.')),
 				 array('title' => 'Objectif final',
 					   'sentence' => array('Le but est donc de trouver les serveurs compromis en faisant le moins de clics possible et de les réparer pour satisfaire le maximum d\'utilisateurs de votre réseau.',
