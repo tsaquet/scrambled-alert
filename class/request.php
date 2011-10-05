@@ -2,7 +2,7 @@
 
 $filename = basename($_SERVER['REQUEST_URI']);
 
-if($filename == "index.php" || $filename == "" || preg_match('/^\?/', $filename) || $filename == "game")
+if(substr ($filename , 0 , 9 ) == "index.php" || $filename == "" || preg_match('/^\?/', $filename) || $filename == "game")
 {
 	require_once("./class/managers/mysql.php");
 }
