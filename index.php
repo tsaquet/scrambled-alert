@@ -1,21 +1,21 @@
 <?php 
 
-require_once("./facebook_sdk/php/facebook.php");
+//require_once("./facebook_sdk/php/facebook.php");
 require_once("./class/request.php");
 
 $db = Request::get();
 
-$app_id = "173509166035359";
-$app_secret = "1ffe2e75796ab87b27c78b93e60f8a9c";
-$canvas_page = "http://apps.facebook.com/echoes-le-jeu/";
+// $app_id = "173509166035359";
+// $app_secret = "1ffe2e75796ab87b27c78b93e60f8a9c";
+// $canvas_page = "http://apps.facebook.com/echoes-le-jeu/";
 
-$auth_url = "http://www.facebook.com/dialog/oauth?client_id=" . $app_id . "&redirect_uri=" . urlencode($canvas_page)."&scope=publish_stream,publish_actions";
+// $auth_url = "http://www.facebook.com/dialog/oauth?client_id=" . $app_id . "&redirect_uri=" . urlencode($canvas_page)."&scope=publish_stream,publish_actions";
 
 session_name('game');
 session_start();
  
-$facebook = new Facebook(array(  'appId'  => $app_id,  'secret' => $app_secret,  'cookie' => true,));    
-$session = $facebook->getSession();    
+// $facebook = new Facebook(array(  'appId'  => $app_id,  'secret' => $app_secret,  'cookie' => true,));    
+// $session = $facebook->getSession();    
 
 if($session)
 {    
@@ -34,10 +34,10 @@ if($session)
 		$data = json_decode(base64_decode(strtr($payload, '-_', '+/')), true);
 	
 	
-		if(empty($code)) 
-		{
-	        echo("<script> top.location.href='" . $auth_url ."'</script>");
-	  	}
+		// if(empty($code)) 
+		// {
+	        // echo("<script> top.location.href='" . $auth_url ."'</script>");
+	  	// }
 		$_SESSION['token'] = @file_get_contents("https://graph.facebook.com/oauth/access_token?client_id=" . $app_id ."&client_secret=".$app_secret."&redirect_uri=" . urlencode($canvas_page)."&code=".$code);
 		
 		$_SESSION['app_token'] = @file_get_contents("https://graph.facebook.com/oauth/access_token?client_id=" . $app_id ."&client_secret=".$app_secret."&grant_type=client_credentials");
@@ -74,10 +74,10 @@ if($session)
 else 
 {
 	
-	echo 
-	(
-		'<script type="text/javascript" src="//www.facebook.com/thomas.saquet" onload=isLoggedIntoFb("'.$auth_url.'") async="async"></script>'
-	);
+	// echo 
+	// (
+		// '<script type="text/javascript" src="//www.facebook.com/thomas.saquet" onload=isLoggedIntoFb("'.$auth_url.'") async="async"></script>'
+	// );
  	
 	$_SESSION['user'] = 
 	json_decode('{
@@ -133,31 +133,9 @@ $db->log('index');
 		<script type="text/javascript" src="./js/tools.js"></script>
     </head>
     <body>
-		<div class="ads ads_top">
-			<div class="center">
-				<div class="ads_315f3135375f31313136">
-					<script type="text/javascript">
-						var rdads=new String(Math.random()).substring (2, 11)
-						document.write('<sc'+'ript type="text/javascript" src="http://ads.makemereach.com/tracking/ads_display.php?n=315f3135375f31313136_7e2920f005&rdads='+rdads+'"></sc'+'ript>');
-					</script>
-				</div>
-			</div>
-		</div>
 		<div id="bubble" class="bubble"></div>
 		<div id="scores" class="scores"></div>
 		<div id="page" class="shell">
-			<div id="fb-root"></div><script type="text/javascript" src="http://connect.facebook.net/en_US/all.js?v=15199"></script>
-			<script type="text/javascript">
-				FB.init({
-				    appId  : 173509166035359,
-				    status : true,
-				    cookie : true,
-				});
-			    window.fbAsyncInit = function() 
-			    {
-			    	FB.Canvas.setAutoResize();
-			    }
-			</script>
 			<header>
 				<!-- Top Navigation -->
 				<div id="top-nav">

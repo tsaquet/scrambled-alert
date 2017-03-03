@@ -372,14 +372,14 @@ class Board
 		
 		if ($lost)
 		{
-			$scoresManager = ScoresManager::get();
-			$scoresManager->lost($_SESSION['user']->id,$this->sLevel);
+			//$scoresManager = ScoresManager::get();
+			//$scoresManager->lost($_SESSION['user']->id,$this->sLevel);
 			return 'loose';
 		}
 		else if ($win)
 		{
-			$scoresManager = ScoresManager::get();
-			$scoresManager->win($_SESSION['user']->id,$this->sLevel,$_SESSION['nbClic'],$_SESSION['prtSatisfied']);
+			//$scoresManager = ScoresManager::get();
+			//$scoresManager->win($_SESSION['user']->id,$this->sLevel,$_SESSION['nbClic'],$_SESSION['prtSatisfied']);
 			return 'win';
 		}
 		else

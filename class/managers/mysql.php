@@ -16,16 +16,9 @@ class DBM
 
 	private function __construct()
 	{
-		if ($_SERVER["SERVER_NAME"] === "127.0.0.2")
-		{
-				$this->pass = '';
-		}
-		else
-		{		
-				$this->pass = base64_decode('MEdjJU5WRFFHJHFYaGRXVw==');
-		}
+		$this->pass = '';
 		$this->host = 'localhost';
-		$this->user = 'echoes';
+		$this->user = 'root';
 		$this->db = 'echoes_game';
 		
 	}
@@ -46,7 +39,9 @@ class DBM
 
 	public function connect()
 	{
-		$this->link = mysql_connect($this->host, $this->user, $this->pass) or die (mysql_error());
+		// I had to add an @ beacause the method is deprecated and the xml answer is not well interpreted when starting with WARNING =]
+		// I did that to be able to put a working code on Github as fast as possible, of course I will improve that
+		$this->link = @mysql_connect($this->host, $this->user, $this->pass) or die (mysql_error());
 		mysql_select_db($this->db);
 		return $this->link;
 	}
